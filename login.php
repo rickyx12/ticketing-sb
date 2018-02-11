@@ -24,7 +24,7 @@
         <?php if(isset($_GET['error'])): ?>
           <center><span style="color:red;"><?= $_GET['error'] ?></span></center>
         <?php endif; ?>
-        <form id="credentials-form" method="POST" action="login1.php">
+        <form id="credentials-form" method="POST" action="backend/login1.php">
           <div class="form-group">
             <label for="exampleInputEmail1">User ID</label>
             <input class="form-control" id="userId" type="text" name="userId" autocomplete="off" aria-describedby="emailHelp" placeholder="User ID" maxlength="4">

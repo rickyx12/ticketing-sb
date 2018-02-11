@@ -1,4 +1,14 @@
-<?php require_once 'session/session.php' ?>
+<?php 
+	require_once 'session/session.php'; 
+	require 'class/database.php';
+	require 'class/Ticket.php';
+
+	$db = new database();
+	$ticket = new Ticket();
+
+	$ticket->getTicket($_SESSION['userId']);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,7 +32,7 @@
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+    <a class="navbar-brand" href="index.php">Start Bootstrap</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -35,13 +45,15 @@
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="charts.html">
+          <!-- <a class="nav-link" href="charts.html"> -->
+          <a class="nav-link" href="#">
             <i class="fa fa-fw fa-area-chart"></i>
             <span class="nav-link-text">Charts</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="tables.html">
+          <!-- <a class="nav-link" href="tables.html"> -->
+          <a class="nav-link" href="#">
             <i class="fa fa-fw fa-table"></i>
             <span class="nav-link-text">Tables</span>
           </a>
@@ -51,7 +63,7 @@
             <i class="fa fa-fw fa-wrench"></i>
             <span class="nav-link-text">Ticket</span>
           </a>
-          <ul class="sidenav-second-level collapse" id="collapseComponents">
+          <ul class="sidenav-second-level collapse show" id="collapseComponents">
             <li>
               <a href="table-kite.php">Current</a>
             </li>
@@ -236,80 +248,65 @@
     </div>
   </nav>
   <div class="content-wrapper">
-    <div class="container-fluid">
-      <!-- Example DataTables Card-->
-      <div class="card mb-3">
-        <div class="card-header">
-          <div class="col-sm-12">
-            <i class="fa fa-table"></i> Ticket#: DTU-20180101-1
-            <span class="pull-right"><?= date("Y-m-d") ?></span>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-6">
-              Ticket#: DTU-20180101-1
-            </div>
-            <div class="col-md-6 text-right">
-              <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#bs-modal">Add Item</button>
-            </div>
-          </div>
-          <br>
-          <div class="table-responsive">
-            <table class="table table-bordered" width="100%" cellspacing="0">
-              <thead>
-                <tr>
-                  <th>No.</th>
-                  <th>Subject</th>
-                  <th>Code/Title</th>
-                  <th>Activity</th>
-                  <th>Start Time</th>
-                  <th>End Time</th>
-                  <th>Remarks</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Subject the</td>
-                  <td>Lorem</td>
-                  <td width="40%;">E-Lesson project monitoring and administration. Assigning morning and afternoon task for the developers and keeping the records updated</td>
-                  <td>3:24 am</td>
-                  <td>5:40 pm</td>
-                  <td>No Remarks</td>
-                  <td>
-                    <button class="btn btn-default" data-toggle="modal" data-target="#bs-modal"><i class="fa fa-pencil"></i></button>
-                    <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>The Subject</td>
-                  <td>Admin</td>
-                  <td>E-Lesson project monitoring and administration. Assigning morning and afternoon task for the developers and keeping the records updated</td>
-                  <td>7:02 am</td>
-                  <td>9:20 am</td>
-                  <td>Walang remarks</td>
-                  <td>
-                    <button class="btn btn-default" data-toggle="modal" data-target="#bs-modal"><i class="fa fa-pencil"></i></button>
-                    <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                  </td>                  
-                </tr>
-              </tbody>
-            </table>
-            <div class="col-md-12 text-right">
-              <button class="btn btn-success"><i class="fa fa-save"></i> Save</button>
-              <button class="btn btn-info"><i class="fa fa-check"></i> Publish</button>
-            </div>
-          </div>
-        </div>
-        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-      </div>
-    </div>
+   <?php if($db->doubleSelectNow('ticket','ticketNo','status','publish','date',date("Y-m-d")) == "" ): ?>
+	    <div class="container-fluid">
+	      <!-- Example DataTables Card-->
+	      <div class="card mb-3">
+	        <div class="card-header">
+	          <div class="col-sm-12">
+	            <i class="fa fa-table"></i> Ticket#: DTU-20180101-1
+	            <span class="pull-right"><?= $db->formatDate(date("Y-m-d")) ?></span>
+	          </div>
+	        </div>
+		        <div class="card-body">
+		          <div class="row">
+		            <div class="col-md-6">
+		              Ticket#: DTU-20180101-1
+		            </div>
+		            <div class="col-md-6 text-right">
+		              <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add-ticket-modal">Add Item</button>
+		            </div>
+		          </div>
+		          <br>
+			          <div class="table-responsive">
+			            <table class="table table-bordered" width="100%" cellspacing="0">
+			              <thead>
+			                <tr>
+			                  <th>No.</th>
+			                  <th>Subject</th>
+			                  <th>Code/Title</th>
+			                  <th>Activity</th>
+			                  <th>Start Time</th>
+			                  <th>End Time</th>
+			                  <th>Remarks</th>
+			                  <th></th>
+			                </tr>
+			              </thead>
+			              <tbody id="ticket-table"></tbody>
+			            </table>
+			            <div class="col-md-12 text-right">
+			              <button class="btn btn-success"><i class="fa fa-save"></i> Save</button>
+			              <button class="btn btn-info" data-toggle="modal" data-target="#publish-ticket-modal"><i class="fa fa-check"></i> Publish</button>
+			            </div>
+			          </div>
+		        </div>
+	        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+	      </div>
+	    </div>
+	<?php else: ?>
+		<br>
+		<br>
+		<br>
+		<br>
+		<div class="col-md-12 text-center">
+			<img src="published.png" width="100" height="100">
+			<div class="alert alert-default">
+				Your Ticket for today is already published
+			</div>
+		</div>
+	<?php endif; ?>
 
-
-    <div id="bs-modal" class="modal fade" role="dialog">
+    <div id="add-ticket-modal" class="modal fade" role="dialog">
       <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -317,37 +314,89 @@
           <div class="modal-body">
             <div class="form-group">
               <label>Subject:</label>
-              <input type="text" class="form-control">
+              <input type="text" id="subject" class="form-control" autocomplete="off">
             </div>
             <div class="form-group">
               <label></label>Code/Title
-              <input type="text" class="form-control">
+              <input type="text" id="code" class="form-control" autocomplete="off">
             </div>
             <div class="form-group">
               <label>Activity</label>
-              <textarea class="form-control" style="overflow-x: hidden;" rows="5" cols="2"></textarea>
+              <textarea class="form-control" id="activity" style="overflow-x: hidden;" rows="5" cols="2"></textarea>
             </div>
             <div class="form-group">
               <label>Start Time</label>
-              <input type="text" class="form-control">
+              <input type="text" id="start-time" class="form-control" autocomplete="off">
             </div>
             <div class="form-group">
               <label>End Time</label>
-              <input type="text" class="form-control">
+              <input type="text" id="end-time" class="form-control" autocomplete="off">
             </div>
             <div class="form-group">
               <label>Remarks</label>
-              <input type="text" class="form-control">
+              <input type="text" id="remarks" class="form-control" autocomplete="off">
             </div>
             <div class="col-md-12 text-right">
               <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> 
-              <button type="button" class="btn btn-success" data-dismiss="modal">Save</button> 
+              <button type="button" class="btn btn-success" id="add-ticket-btn" data-dismiss="modal">Save</button> 
             </div>           
           </div>
         </div>
 
       </div>
     </div>
+
+    <div id="publish-ticket-modal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+         <div class="modal-header">
+         	<h6 class="modal-title">Publish</h6>
+         </div>
+          <div class="modal-body">
+          	<div class="col-md-12 text-center">
+          		Are you sure you want to publish this ticket?
+          	</div>
+          	<br>
+          	<br>
+            <div class="col-md-12 text-right">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> 
+              <button type="button" class="btn btn-success" id="publish-ticket-btn" data-dismiss="modal">Publish</button> 
+            </div>           
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+ 	<?php if($db->doubleSelectNow('ticket','ticketNo','status','publish','date',date("Y-m-d")) == "" ): ?>
+	    <?php foreach($ticket->getTicket_id() as $id): ?>
+		    <div id="delete-ticket-modal<?= $id ?>" class="modal fade" role="dialog">
+		      <div class="modal-dialog">
+
+		        <!-- Modal content-->
+		        <div class="modal-content">
+		          <div class="modal-header">
+		          	<h5 class="modal-title"><?= $db->selectNow('ticket','subject','id',$id) ?></h5>
+		          </div>
+		          <div class="modal-body">
+		          	<div class="col-md-12 text-center">
+		          		<h5>Delete <span style='color:red;'><?= $db->selectNow('ticket','title','id',$id) ?></span>?</h5>
+		          	</div>
+		          	<Br>
+		            <div class="col-md-12 text-right">
+		              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> 
+		              <button type="button" class="btn btn-danger" id="delete-ticket-btn<?= $id ?>" data-dismiss="modal">Delete</button> 
+		            </div>           
+		          </div>
+		        </div>
+
+		      </div>
+		    </div>
+	    <?php endforeach; ?>
+	<?php endif; ?>
+
 
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
@@ -392,6 +441,8 @@
     <script src="js/sb-admin.min.js"></script>
     <!-- Custom scripts for this page-->
     <script src="js/sb-admin-datatables.min.js"></script>
+    <script src="js/show-current-ticket.js"></script>
+    <script src="js/add-ticket.js"></script>
   </div>
 </body>
 
