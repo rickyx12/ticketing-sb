@@ -248,20 +248,20 @@
     </div>
   </nav>
   <div class="content-wrapper">
-   <?php if($db->doubleSelectNow('ticket','ticketNo','status','publish','date',date("Y-m-d")) == "" ): ?>
-	    <div class="container-fluid">
+   <?php if($db->doubleSelectNow('ticket','ticketNo','status','publish','datePublished',date("Y-m-d")) == "" ): ?>
+	    <div id="allow" class="container-fluid">
 	      <!-- Example DataTables Card-->
 	      <div class="card mb-3">
 	        <div class="card-header">
 	          <div class="col-sm-12">
-	            <i class="fa fa-table"></i> Ticket#: DTU-20180101-1
+	            <i class="fa fa-table"></i> Ticket#: DTU-<?= date("Ymd") ?>-<?= $ticket->getLastTicketNo() + 1 ?>
 	            <span class="pull-right"><?= $db->formatDate(date("Y-m-d")) ?></span>
 	          </div>
 	        </div>
 		        <div class="card-body">
 		          <div class="row">
 		            <div class="col-md-6">
-		              Ticket#: DTU-20180101-1
+		              Ticket#: DTU-<?= date("Ymd") ?>-<?= $ticket->getLastTicketNo() + 1 ?>
 		            </div>
 		            <div class="col-md-6 text-right">
 		              <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add-ticket-modal">Add Item</button>
@@ -305,6 +305,16 @@
 			</div>
 		</div>
 	<?php endif; ?>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div id="not-allow" class="col-md-12 text-center">
+      <img src="published.png" width="100" height="100">
+      <div class="alert alert-default">
+        Your Ticket for today is already published
+      </div>
+    </div>
 
     <div id="add-ticket-modal" class="modal fade" role="dialog">
       <div class="modal-dialog">
@@ -370,7 +380,7 @@
       </div>
     </div>
 
- 	<?php if($db->doubleSelectNow('ticket','ticketNo','status','publish','date',date("Y-m-d")) == "" ): ?>
+ 	<?php if($db->doubleSelectNow('ticket','ticketNo','status','publish','datePublished',date("Y-m-d")) == "" ): ?>
 	    <?php foreach($ticket->getTicket_id() as $id): ?>
 		    <div id="delete-ticket-modal<?= $id ?>" class="modal fade" role="dialog">
 		      <div class="modal-dialog">
@@ -394,6 +404,53 @@
 
 		      </div>
 		    </div>
+
+
+        <div id="edit-ticket-modal<?= $id ?>" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title"><?= $db->selectNow('ticket','subject','id',$id) ?></h5>
+              </div>
+              <div class="modal-body">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Subject</label>
+                    <input type="text" id="edit-subject" class="form-control" autocomplete="off" value="<?= $db->selectNow('ticket','subject','id',$id) ?>">
+                  </div>
+                  <div class="form-group">
+                    <label>Code/Title</label>
+                    <input type="text" id="edit-title" class="form-control" autocomplete="off" value="<?= $db->selectNow('ticket','title','id',$id) ?>">
+                  </div>
+                  <div class="form-group">
+                    <label>Activity</label>
+                    <input type="text" id="edit-activity" class="form-control" autocomplete="off" value="<?= $db->selectNow('ticket','activity','id',$id) ?>">
+                  </div>
+                  <div class="form-group">
+                    <label>Start Time</label>
+                    <input type="text" id="edit-start" class="form-control" autocomplete="off" value="<?= $db->selectNow('ticket','start','id',$id) ?>">
+                  </div>
+                  <div class="form-group">
+                    <label>End Time</label>
+                    <input type="text" id="edit-end" class="form-control" autocomplete="off" value="<?= $db->selectNow('ticket','end','id',$id) ?>">
+                  </div>
+                  <div class="form-group">
+                    <label>Remarks</label>
+                    <input type="text" id="edit-remarks" class="form-control" autocomplete="off" value="<?= $db->selectNow('ticket','remarks','id',$id) ?>">
+                  </div>
+                </div>
+                <Br>
+                <div class="col-md-12 text-right">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> 
+                  <button type="button" class="btn btn-success" id="edit-ticket-btn<?= $id ?>" data-dismiss="modal">Update</button> 
+                </div>           
+              </div>
+            </div>
+
+          </div>
+        </div>        
 	    <?php endforeach; ?>
 	<?php endif; ?>
 
@@ -442,6 +499,7 @@
     <!-- Custom scripts for this page-->
     <script src="js/sb-admin-datatables.min.js"></script>
     <script src="js/show-current-ticket.js"></script>
+    <script src="js/show-published-ticket.js"></script>
     <script src="js/add-ticket.js"></script>
   </div>
 </body>

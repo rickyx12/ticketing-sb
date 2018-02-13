@@ -1,4 +1,4 @@
-function getTicket(json) {
+function getTicketByDate(json,id) {
 	$.getJSON(json,'',function(result) {
 		var tableData = '';
 		console.log(result);
@@ -13,13 +13,12 @@ function getTicket(json) {
 				 tableData += '<td>'+field.start+'</td>';
 				 tableData += '<td>'+field.end+'</td>';
 				 tableData += '<td>'+field.remarks+'</td>';
-				 tableData += '<td><button class="btn btn-default" data-toggle="modal" data-target="#edit-ticket-modal'+field.id+'"><i class="fa fa-pencil"></i></button> <button class="btn btn-danger" data-toggle="modal" data-target="#delete-ticket-modal'+field.id+'"><i class="fa fa-trash"></i></button><input type="checkbox" class="publish" value="'+field.id+'" checked></td>'
 				 tableData += '</tr>';
 			});
 		}else {
 			tableData += '<tr></tr>';
 		}
 
-		 $('#ticket-table').html(tableData);
+		 $(id).html(tableData);
 	});
 }

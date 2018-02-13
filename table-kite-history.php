@@ -15,8 +15,11 @@
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <!-- Page level plugin CSS-->
   <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+  <link href="vendor/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
+
+
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -51,7 +54,7 @@
             <i class="fa fa-fw fa-wrench"></i>
             <span class="nav-link-text">Ticket</span>
           </a>
-          <ul class="sidenav-second-level collapse" id="collapseComponents">
+          <ul class="sidenav-second-level collapse show" id="collapseComponents">
             <li>
               <a href="table-kite.php">Current</a>
             </li>
@@ -243,8 +246,8 @@
           <div class="col-sm-12">
             <i class="fa fa-table"></i> Ticket History
             <div class="col-md-6 pull-right text-right">
-              <button data-toggle="modal" data-target="#top-modal" class="btn btn-primary btn-sm">Download</button>
-              <button data-toggle="modal" data-target="#top-modal" class="btn btn-primary btn-sm">Print</button>
+              <button data-toggle="modal" data-target="#download-modal" class="btn btn-primary btn-sm">Download</button>
+              <button data-toggle="modal" data-target="#print-modal" class="btn btn-primary btn-sm">Print</button>
             </div>
           </div>
         </div>
@@ -258,29 +261,7 @@
                   <th>Actions</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Jan 1, 2018</td>
-                  <td>
-                    <div class="col-md-12">
-                      <button class="btn btn-default">View</button>
-                      <button class="btn btn-default">Download</button>
-                      <button class="btn btn-default">Print</button>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Jan 2, 2018</td>
-                  <td>
-                    <div class="col-md-12">
-                      <button class="btn btn-default">View</button>
-                      <button class="btn btn-default">Download</button>
-                      <button class="btn btn-default">Print</button>
-                    </div>                    
-                  </td>                
-                </tr>
+              <tbody id="published-ticket-table">
               </tbody>
             </table>
           </div>
@@ -290,39 +271,39 @@
     </div>
 
 
-    <div id="bs-modal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
+    <div id="download-modal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-lg">
 
         <!-- Modal content-->
         <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Select Date</h5>
+          </div>
           <div class="modal-body">
-            <div class="form-group">
-              <label>Subject:</label>
-              <input type="text" class="form-control">
-            </div>
-            <div class="form-group">
-              <label></label>Code/Title
-              <input type="text" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Activity</label>
-              <textarea class="form-control" style="overflow-x: hidden;" rows="5" cols="2"></textarea>
-            </div>
-            <div class="form-group">
-              <label>Start Time</label>
-              <input type="text" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>End Time</label>
-              <input type="text" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Remarks</label>
-              <input type="text" class="form-control">
+            <div class="col-md-4">
+              <div class="form-group">
+                <input type="text" id="download-date" class="form-control">
+              </div>
             </div>
             <div class="col-md-12 text-right">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> 
-              <button type="button" class="btn btn-success" data-dismiss="modal">Save</button> 
+              <table id="download-ticket-form-table" class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>Subject</th>
+                    <th>Code/Title</th>
+                    <th>Activity</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Remarks</th>
+                  </tr>
+                </thead>
+                <tbody id="download-ticket-form-body-table"></tbody>
+              </table>
+            </div>
+            <div class="col-md-12 text-right">
+              <button id="download-print-btn" class="btn btn-danger">Download</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
             </div>           
           </div>
         </div>
@@ -330,17 +311,39 @@
       </div>
     </div>
 
-    <div id="top-modal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
+    <div id="print-modal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-lg">
 
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Select Date</h4>
+              <h5 class="modal-title">Select Date</h5>
             </div>
             <div class="modal-body">
-              <div class="form-group">
-                <input type="text" class="form-control">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <input type="text" id="print-date" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-12">
+                <table id="print-ticket-form-table" class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>No.</th>
+                      <th>Subject</th>
+                      <th>Code/Title</th>
+                      <th>Activity</th>
+                      <th>Start Time</th>
+                      <th>End Time</th>
+                      <th>Remarks</th>
+                    </tr>
+                  </thead>
+                  <tbody id="print-ticket-form-body-table"></tbody>
+                </table>                
+              </div>
+              <div class="col-md-12 text-right">
+                <button class="btn btn-default btn-success print-btn">View</button>
+                <button class="btn btn-default btn-danger print-btn">Print</button>
               </div>
             </div>
             <div class="modal-footer">
@@ -393,8 +396,13 @@
     <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
+    <script src="vendor/jquery-ui-1.12.1/jquery-ui.js"></script>    
     <!-- Custom scripts for this page-->
     <script src="js/sb-admin-datatables.min.js"></script>
+    <script src="js/date-ticket.js"></script>
+    <script src="js/show-current-ticket.js"></script>
+    <script src="js/show-published-ticket.js"></script>
+    <script src="js/add-ticket.js"></script>    
   </div>
 </body>
 
