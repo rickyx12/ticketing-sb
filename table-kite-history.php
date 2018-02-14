@@ -272,7 +272,7 @@
 
 
     <div id="download-modal" class="modal fade" role="dialog">
-      <div class="modal-dialog modal-lg">
+      <div class="modal-dialog modal-md">
 
         <!-- Modal content-->
         <div class="modal-content">
@@ -280,22 +280,17 @@
             <h5 class="modal-title">Select Date</h5>
           </div>
           <div class="modal-body">
-            <div class="col-md-4">
+            <div class="col-md-12">
               <div class="form-group">
                 <input type="text" id="download-date" class="form-control">
               </div>
             </div>
-            <div class="col-md-12 text-right">
+            <div class="text-right">
               <table id="download-ticket-form-table" class="table table-bordered">
                 <thead>
                   <tr>
-                    <th>No.</th>
-                    <th>Subject</th>
-                    <th>Code/Title</th>
-                    <th>Activity</th>
-                    <th>Start Time</th>
-                    <th>End Time</th>
-                    <th>Remarks</th>
+                    <th>Ticket No.</th>
+                    <th>Date</th>
                   </tr>
                 </thead>
                 <tbody id="download-ticket-form-body-table"></tbody>
@@ -326,23 +321,35 @@
                 </div>
               </div>
               <div class="col-md-12">
+                <!--TABLE WHEN DATE IS SELECTED-->
                 <table id="print-ticket-form-table" class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Ticket No.</th>
+                      <th>Date</th>
+                    </tr>
+                  </thead>
+                  <tbody id="print-ticket-form-body-table"></tbody>
+                </table>
+
+                <!--TABLE WHEN VIEW IS CLICKED-->
+                <table id="print-view-form-table" class="table table-bordered">
                   <thead>
                     <tr>
                       <th>No.</th>
                       <th>Subject</th>
-                      <th>Code/Title</th>
+                      <th>Title</th>
                       <th>Activity</th>
                       <th>Start Time</th>
                       <th>End Time</th>
                       <th>Remarks</th>
                     </tr>
                   </thead>
-                  <tbody id="print-ticket-form-body-table"></tbody>
+                  <tbody id="print-view-form-body-table"></tbody>
                 </table>                
               </div>
               <div class="col-md-12 text-right">
-                <button class="btn btn-default btn-success print-btn">View</button>
+                <button id="view-print-btn" class="btn btn-default btn-success print-btn">View</button>
                 <button class="btn btn-default btn-danger print-btn">Print</button>
               </div>
             </div>
@@ -396,12 +403,15 @@
     <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
-    <script src="vendor/jquery-ui-1.12.1/jquery-ui.js"></script>    
+    <script src="vendor/jquery-ui-1.12.1/jquery-ui.js"></script>   
+    <script src="vendor/jspdf/jspdf.min.js"></script>
+    <script src="vendor/jspdf/jspdf.plugin.autotable.js"></script> 
     <!-- Custom scripts for this page-->
     <script src="js/sb-admin-datatables.min.js"></script>
     <script src="js/date-ticket.js"></script>
     <script src="js/show-current-ticket.js"></script>
     <script src="js/show-published-ticket.js"></script>
+    <script src="js/show-task-by-ticketno.js"></script>
     <script src="js/add-ticket.js"></script>    
   </div>
 </body>

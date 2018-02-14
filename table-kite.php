@@ -381,78 +381,80 @@
     </div>
 
  	<?php if($db->doubleSelectNow('ticket','ticketNo','status','publish','datePublished',date("Y-m-d")) == "" ): ?>
-	    <?php foreach($ticket->getTicket_id() as $id): ?>
-		    <div id="delete-ticket-modal<?= $id ?>" class="modal fade" role="dialog">
-		      <div class="modal-dialog">
+      <?php if($ticket->getTicket_id() != ""): ?>
+  	    <?php foreach($ticket->getTicket_id() as $id): ?>
+  		    <div id="delete-ticket-modal<?= $id ?>" class="modal fade" role="dialog">
+  		      <div class="modal-dialog">
 
-		        <!-- Modal content-->
-		        <div class="modal-content">
-		          <div class="modal-header">
-		          	<h5 class="modal-title"><?= $db->selectNow('ticket','subject','id',$id) ?></h5>
-		          </div>
-		          <div class="modal-body">
-		          	<div class="col-md-12 text-center">
-		          		<h5>Delete <span style='color:red;'><?= $db->selectNow('ticket','title','id',$id) ?></span>?</h5>
-		          	</div>
-		          	<Br>
-		            <div class="col-md-12 text-right">
-		              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> 
-		              <button type="button" class="btn btn-danger" id="delete-ticket-btn<?= $id ?>" data-dismiss="modal">Delete</button> 
-		            </div>           
-		          </div>
-		        </div>
+  		        <!-- Modal content-->
+  		        <div class="modal-content">
+  		          <div class="modal-header">
+  		          	<h5 class="modal-title"><?= $db->selectNow('ticket','subject','id',$id) ?></h5>
+  		          </div>
+  		          <div class="modal-body">
+  		          	<div class="col-md-12 text-center">
+  		          		<h5>Delete <span style='color:red;'><?= $db->selectNow('ticket','title','id',$id) ?></span>?</h5>
+  		          	</div>
+  		          	<Br>
+  		            <div class="col-md-12 text-right">
+  		              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> 
+  		              <button type="button" class="btn btn-danger" id="delete-ticket-btn<?= $id ?>" data-dismiss="modal">Delete</button> 
+  		            </div>           
+  		          </div>
+  		        </div>
 
-		      </div>
-		    </div>
+  		      </div>
+  		    </div>
 
 
-        <div id="edit-ticket-modal<?= $id ?>" class="modal fade" role="dialog">
-          <div class="modal-dialog">
+          <div id="edit-ticket-modal<?= $id ?>" class="modal fade" role="dialog">
+            <div class="modal-dialog">
 
-            <!-- Modal content-->
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title"><?= $db->selectNow('ticket','subject','id',$id) ?></h5>
-              </div>
-              <div class="modal-body">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label>Subject</label>
-                    <input type="text" id="edit-subject" class="form-control" autocomplete="off" value="<?= $db->selectNow('ticket','subject','id',$id) ?>">
-                  </div>
-                  <div class="form-group">
-                    <label>Code/Title</label>
-                    <input type="text" id="edit-title" class="form-control" autocomplete="off" value="<?= $db->selectNow('ticket','title','id',$id) ?>">
-                  </div>
-                  <div class="form-group">
-                    <label>Activity</label>
-                    <input type="text" id="edit-activity" class="form-control" autocomplete="off" value="<?= $db->selectNow('ticket','activity','id',$id) ?>">
-                  </div>
-                  <div class="form-group">
-                    <label>Start Time</label>
-                    <input type="text" id="edit-start" class="form-control" autocomplete="off" value="<?= $db->selectNow('ticket','start','id',$id) ?>">
-                  </div>
-                  <div class="form-group">
-                    <label>End Time</label>
-                    <input type="text" id="edit-end" class="form-control" autocomplete="off" value="<?= $db->selectNow('ticket','end','id',$id) ?>">
-                  </div>
-                  <div class="form-group">
-                    <label>Remarks</label>
-                    <input type="text" id="edit-remarks" class="form-control" autocomplete="off" value="<?= $db->selectNow('ticket','remarks','id',$id) ?>">
-                  </div>
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title"><?= $db->selectNow('ticket','subject','id',$id) ?></h5>
                 </div>
-                <Br>
-                <div class="col-md-12 text-right">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> 
-                  <button type="button" class="btn btn-success" id="edit-ticket-btn<?= $id ?>" data-dismiss="modal">Update</button> 
-                </div>           
+                <div class="modal-body">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Subject</label>
+                      <input type="text" id="edit-subject" class="form-control" autocomplete="off" value="<?= $db->selectNow('ticket','subject','id',$id) ?>">
+                    </div>
+                    <div class="form-group">
+                      <label>Code/Title</label>
+                      <input type="text" id="edit-title" class="form-control" autocomplete="off" value="<?= $db->selectNow('ticket','title','id',$id) ?>">
+                    </div>
+                    <div class="form-group">
+                      <label>Activity</label>
+                      <input type="text" id="edit-activity" class="form-control" autocomplete="off" value="<?= $db->selectNow('ticket','activity','id',$id) ?>">
+                    </div>
+                    <div class="form-group">
+                      <label>Start Time</label>
+                      <input type="text" id="edit-start" class="form-control" autocomplete="off" value="<?= $db->selectNow('ticket','start','id',$id) ?>">
+                    </div>
+                    <div class="form-group">
+                      <label>End Time</label>
+                      <input type="text" id="edit-end" class="form-control" autocomplete="off" value="<?= $db->selectNow('ticket','end','id',$id) ?>">
+                    </div>
+                    <div class="form-group">
+                      <label>Remarks</label>
+                      <input type="text" id="edit-remarks" class="form-control" autocomplete="off" value="<?= $db->selectNow('ticket','remarks','id',$id) ?>">
+                    </div>
+                  </div>
+                  <Br>
+                  <div class="col-md-12 text-right">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> 
+                    <button type="button" class="btn btn-success" id="edit-ticket-btn<?= $id ?>" data-dismiss="modal">Update</button> 
+                  </div>           
+                </div>
               </div>
-            </div>
 
-          </div>
-        </div>        
-	    <?php endforeach; ?>
-	<?php endif; ?>
+            </div>
+          </div>        
+  	    <?php endforeach; ?>
+      <?php endif; ?>
+  <?php endif; ?>
 
 
     <!-- /.container-fluid-->

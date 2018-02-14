@@ -5,6 +5,7 @@ $(function(){
 	$('#download-print-btn').hide();
 	$('#print-ticket-form-table').hide();
 	$('.print-btn').hide();
+	$('#print-view-form-table').hide();
 
 	getTicket('./backend/ticket-json-encoder.php');
 	getPublishedTicket('./backend/published-ticket-json-encoder.php');
@@ -117,7 +118,6 @@ $(function(){
 	});
 
 
-
 	$('#download-date').datepicker({
 		"dateFormat":"yy-mm-dd",
 	    onSelect: function(dateText, inst) {
@@ -139,7 +139,33 @@ $(function(){
 			$('#print-ticket-form-table').show();
 			$('.print-btn').show();
 			getTicketByDate('./backend/date-ticket-json-encoder.php?date='+selectedDate,'#print-ticket-form-body-table');
+
+			$('#view-print-btn').click(function(){
+				$('#print-ticket-form-table').hide();
+				$('#print-view-form-table').show();
+				$('#view-print-btn').hide();
+				getTaskByDate('./backend/task-by-ticket-json-encoder.php?date='+selectedDate,'#print-view-form-body-table');
+			});
 		}
+	});
+
+
+
+	$('#download-print-btn').click(function(){
+		var columns = ["No", "Subject", "Code/Title","Activity","Start Time","End Time","Remarks"];
+		var rows = [];
+		var title;
+		var selectedDate = $('#download-date').val();
+		$.getJSON("./backend/task-by-ticket-json-encoder.php?date="+selectedDate,'',function(result) {
+			
+			$.each(result,function(i,field){
+				rows.push([field.id,field.subject,field.code,field.activity,field.start,field.end,field.remarks]);
+				title = field.ticketNo;
+			});				
+			var doc = new jsPDF('p', 'pt');
+			doc.autoTable(columns, rows);
+			doc.save('ticket#'+title+'.pdf');					
+		});
 	});
 
 });

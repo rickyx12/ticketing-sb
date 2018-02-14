@@ -39,7 +39,7 @@
 						</div>
 						<div class="col-md-3">
 								<label>DATE:</label>
-								<input type="text" class="other-field" value="<?= $db->formatDate($db->selectNow('ticket','date','ticketNo',$_GET['ticketNo'])) ?>">
+								<input type="text" class="other-field" value="<?= $db->formatDate($db->selectNow('ticket','datePublished','ticketNo',$_GET['ticketNo'])) ?>">
 						</div>					
 						<table class="table table-bordered">
 							<thead>

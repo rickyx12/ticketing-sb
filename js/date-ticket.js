@@ -6,13 +6,8 @@ function getTicketByDate(json,id) {
 		if(result != "null") {
 			$.each(result,function(i,field) {	
 				 tableData += '<tr>';
-				 tableData += '<td>'+field.id+'</td>';
-				 tableData += '<td>'+field.subject+'</td>';
-				 tableData += '<td>'+field.code+'</td>';
-				 tableData += '<td>'+field.activity+'</td>';
-				 tableData += '<td>'+field.start+'</td>';
-				 tableData += '<td>'+field.end+'</td>';
-				 tableData += '<td>'+field.remarks+'</td>';
+				 tableData += '<td>'+field.ticketId+'</td>';
+				 tableData += '<td>'+field.date+'</td>';
 				 tableData += '</tr>';
 			});
 		}else {

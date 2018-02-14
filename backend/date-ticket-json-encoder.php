@@ -13,13 +13,8 @@
 
 	if(!empty($ticket->getTicketByDate_id()) > 0) {
 		foreach($ticket->getTicketByDate_id() as $ticketId) {
-			$data[$ticketId]['id'] = $ticketId;
-			$data[$ticketId]['subject'] = $db->selectNow('ticket','subject','id',$ticketId);
-			$data[$ticketId]['code'] = $db->selectNow('ticket','title','id',$ticketId);
-			$data[$ticketId]['start'] = $db->selectNow('ticket','start','id',$ticketId);
-			$data[$ticketId]['end'] = $db->selectNow('ticket','end','id',$ticketId);
-			$data[$ticketId]['activity'] = $db->selectNow('ticket','activity','id',$ticketId);
-			$data[$ticketId]['remarks'] = $db->selectNow('ticket','remarks','id',$ticketId);
+			$data[$ticketId]['ticketId'] = $db->selectNow('ticket','ticketNo','id',$ticketId);
+			$data[$ticketId]['date'] = $db->formatDate($db->selectNow('ticket','datePublished','id',$ticketId));
 		}
 		echo json_encode($data);
 	}else { 

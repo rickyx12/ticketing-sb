@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<script src="vendor/jquery/jquery.min.js"></script>
+		<script src="vendor/jspdf/jspdf.min.js"></script>
+		<script src="vendor/jspdf/jspdf.plugin.autotable.js"></script>
+		<script>
+
+
+
+
+			var columns = ["No", "Subject", "Code/Title","Activity","Start Time","End Time","Remarks"];
+			var rows = [];
+			var title;
+
+			$.getJSON("backend/date-ticket-json-encoder.php?date=2018-02-02",'',function(result) {
+				//console.log(result);
+				$.each(result,function(i,field){
+					//console.log(field.subject);
+					rows.push([field.id,field.subject,field.code,field.activity,field.start,field.end,field.remarks]);
+					title = field.ticketId;
+				});				
+				var doc = new jsPDF('p', 'pt');
+				doc.autoTable(columns, rows);
+				doc.save('ticket#'+title+'.pdf');					
+			});
+		</script>
+	</head>
+</html>
