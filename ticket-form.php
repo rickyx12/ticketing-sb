@@ -13,13 +13,23 @@
 	<head>
 		<title>Ticket</title>
 		<script src="vendor/jquery/jquery.min.js"></script>
+		<script src="vendor/jquery-print-preview/js/printPreview.js"></script>
 		<link rel="stylesheet" type="text/css" href="vendor/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 		<script src="vendor/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>		
 		<link rel="stylesheet" type="text/css" href="css/ticket-form.css">
+		<script>
+			$(document).ready(function(){
+				$("#print-btn").printPreview({
+					obj2print:"#to-print",
+					width:'1000'
+				});
+			});
+		</script>
 	</head>
 	<body>
+		<button id="print-btn" class="btn btn-danger" style="margin-left: 2%; margin-top: 0.5%;">Print</button>
 		<br>
-		<div id="content">
+		<div id="to-print" id="content">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12 text-center">

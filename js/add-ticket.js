@@ -1,85 +1,15 @@
-$(function(){
-
-	$('#not-allow').hide();
-	$('#download-ticket-form-table').hide();
-	$('#download-print-btn').hide();
-	$('#print-ticket-form-table').hide();
-	$('.print-btn').hide();
-	$('#print-view-form-table').hide();
-
-	getTicket('./backend/ticket-json-encoder.php');
-	getPublishedTicket('./backend/published-ticket-json-encoder.php');
-	
-	$('#add-ticket-btn').click(function(){
-
-		var subject = $('#subject').val();
-		var code = $('#code').val();
-		var activity = $('#activity').val();
-		var startTime = $('#start-time').val();
-		var endTime = $('#end-time').val();
-		var remarks = $('#remarks').val();
-
-		var data = {
-			subject:subject,
-			code:code,
-			start:startTime,
-			end:endTime,
-			activity:activity,
-			remarks:remarks
-		};
-
-		$.ajax({
-			url:'./backend/add-ticket.php',
-			type:'POST',
-			data:data,
-			success:function(){
-				getTicket('./backend/ticket-json-encoder.php');
-				$('#subject').val('');
-				$('#code').val('');
-				$('#start-time').val('');
-				$('#end-time').val('');
-				$('#activity').val('');
-				$('#remarks').val('');
-			}
-		});
-
-	});
-
-	$('#publish-ticket-btn').click(function(){
-
-		var chkArray = [];
-		
-		$(".publish:checked").each(function() {
-			chkArray.push($(this).val());
-		});
-		
-		console.log(chkArray);
-		
-		var selected;
-		selected = chkArray.join(',') ;
-		$.ajax({
-			url:'./backend/publish.php',
-			type:'POST',
-			data:{ids:selected},
-			success:function(){
-				$('#allow').hide();
-				$('#not-allow').show();
-				getPublishedTicket('./backend/published-ticket-json-encoder.php');
-			}
-		});
-
-	});
-
-
-
+function ticketBtn() {
 	$.getJSON('./backend/ticket-json-encoder.php','',function(result) {	
-			$.each(result,function(i,field) {	
+
+			$.each(result,function(i,field) {
+
 				 $('#delete-ticket-btn'+field.id).click(function(){
 					$.ajax({
 						url:'./backend/delete-ticket.php',
 						type:'POST',
 						data:{id:field.id},
 						success:function(){
+						    $('.modal-backdrop').remove();
 							getTicket('./backend/ticket-json-encoder.php');
 						}
 					});
@@ -116,7 +46,81 @@ $(function(){
 
 			});
 	});
+}
 
+$(function(){
+
+	$('#not-allow').hide();
+	$('#download-ticket-form-table').hide();
+	$('#download-print-btn').hide();
+	$('#print-ticket-form-table').hide();
+	$('.print-btn').hide();
+	$('#print-view-form-table').hide();
+
+	getTicket('./backend/ticket-json-encoder.php');
+	ticketBtn();
+	getPublishedTicket('./backend/published-ticket-json-encoder.php');
+	
+	$('#add-ticket-btn').click(function(){
+
+		var subject = $('#subject').val();
+		var code = $('#code').val();
+		var activity = $('#activity').val();
+		var startTime = $('#start-time').val();
+		var endTime = $('#end-time').val();
+		var remarks = $('#remarks').val();
+
+		var data = {
+			subject:subject,
+			code:code,
+			start:startTime,
+			end:endTime,
+			activity:activity,
+			remarks:remarks
+		};
+
+		$.ajax({
+			url:'./backend/add-ticket.php',
+			type:'POST',
+			data:data,
+			success:function(){
+				getTicket('./backend/ticket-json-encoder.php');
+				ticketBtn();
+				$('#subject').val('');
+				$('#code').val('');
+				$('#start-time').val('');
+				$('#end-time').val('');
+				$('#activity').val('');
+				$('#remarks').val('');
+			}
+		});
+
+	});
+
+	$('#publish-ticket-btn').click(function(){
+
+		var chkArray = [];
+		
+		$(".publish:checked").each(function() {
+			chkArray.push($(this).val());
+		});
+		
+		console.log(chkArray);
+		
+		var selected;
+		selected = chkArray.join(',') ;
+		$.ajax({
+			url:'./backend/publish.php',
+			type:'POST',
+			data:{ids:selected},
+			success:function(){
+				$('#allow').hide();
+				$('#not-allow').show();
+				getPublishedTicket('./backend/published-ticket-json-encoder.php');
+			}
+		});
+
+	});
 
 	$('#download-date').datepicker({
 		"dateFormat":"yy-mm-dd",

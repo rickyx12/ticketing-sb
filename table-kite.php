@@ -380,13 +380,15 @@
       </div>
     </div>
 
- 	<?php if($db->doubleSelectNow('ticket','ticketNo','status','publish','datePublished',date("Y-m-d")) == "" ): ?>
+    <div id="edit-modal-handler"></div>
+    <div id="delete-modal-handler"></div>
+
+	<?php if($db->doubleSelectNow('ticket','ticketNo','status','publish','datePublished',date("Y-m-d")) == "" ): ?>
       <?php if($ticket->getTicket_id() != ""): ?>
   	    <?php foreach($ticket->getTicket_id() as $id): ?>
-  		    <div id="delete-ticket-modal<?= $id ?>" class="modal fade" role="dialog">
+<!--   		    <div id="delete-ticket-modal<?= $id ?>" class="modal fade" role="dialog">
   		      <div class="modal-dialog">
 
-  		        <!-- Modal content-->
   		        <div class="modal-content">
   		          <div class="modal-header">
   		          	<h5 class="modal-title"><?= $db->selectNow('ticket','subject','id',$id) ?></h5>
@@ -402,15 +404,13 @@
   		            </div>           
   		          </div>
   		        </div>
-
   		      </div>
-  		    </div>
+  		    </div> -->
 
-
+<!-- 
           <div id="edit-ticket-modal<?= $id ?>" class="modal fade" role="dialog">
             <div class="modal-dialog">
 
-              <!-- Modal content-->
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title"><?= $db->selectNow('ticket','subject','id',$id) ?></h5>
@@ -451,10 +451,10 @@
               </div>
 
             </div>
-          </div>        
+          </div>    -->     
   	    <?php endforeach; ?>
       <?php endif; ?>
-  <?php endif; ?>
+  <?php endif; ?> 
 
 
     <!-- /.container-fluid-->

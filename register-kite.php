@@ -261,7 +261,8 @@
             <div class="form-row">
               <div class="col-md-6">
                 <label for="exampleInputName">Name</label>
-                <input class="form-control" id="employee-name" type="text" autocomplete="off" value="<?= $db->selectNow('user','name','id',$_SESSION['userId']) ?>">
+                <input class="form-control" id="employee-name" type="text" autocomplete="off" value="<?= $db->selectNow('user','name','id',$_SESSION['userId'
+                ]) ?>">
               </div>
             </div>
           </div>
