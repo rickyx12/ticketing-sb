@@ -227,13 +227,13 @@
             <img src="avatar.png" alt="Avatar" class="avatar">
           </a>
           <div class="dropdown-menu" aria-labelledby="alertsDropdown">
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="register-kite.php">
               <span class="text-default">
                   Edit Profile
               </span>             
             </a>
         </li>
-      <!-----XB---->       
+      <!-----XB---->      
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
@@ -269,78 +269,31 @@
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
-                <label for="exampleInputPassword1">Password</label>
-                <input class="form-control" id="password" type="password">
-              </div>
+                <span id="message-response" style="color:red; font-size: 12px;">
+                  <?php if(isset($_SESSION['message'])): ?>
+                    <?= $_SESSION['message'] ?>
+                  <?php endif; ?>
+                </span>
+                <Br>
+                <label for="exampleInputPassword1">Current Password</label>
+                <input class="form-control" id="current-password" type="password">
+              </div>            
             </div>
           </div>
-          <a class="btn btn-primary btn-block" href="login.html">Update</a>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="exampleInputPassword1">New Password</label>
+                <input class="form-control" id="new-password" type="password">
+              </div>            
+            </div>
+          </div>
+          <a class="btn btn-primary btn-block" id="update-profile-btn">Update</a>
         </form>
       </div>
     </div>
       
     </div>
-
-    <div id="bs-modal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-body">
-            <div class="form-group">
-              <label>Subject:</label>
-              <input type="text" class="form-control">
-            </div>
-            <div class="form-group">
-              <label></label>Code/Title
-              <input type="text" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Activity</label>
-              <textarea class="form-control" style="overflow-x: hidden;" rows="5" cols="2"></textarea>
-            </div>
-            <div class="form-group">
-              <label>Start Time</label>
-              <input type="text" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>End Time</label>
-              <input type="text" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Remarks</label>
-              <input type="text" class="form-control">
-            </div>
-            <div class="col-md-12 text-right">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> 
-              <button type="button" class="btn btn-success" data-dismiss="modal">Save</button> 
-            </div>           
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <div id="top-modal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Select Date</h4>
-            </div>
-            <div class="modal-body">
-              <div class="form-group">
-                <input type="text" class="form-control">
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
-            </div>           
-          </div>
-        </div>
-
-      </div>
     </div>
 
     <!-- /.container-fluid-->
@@ -386,6 +339,7 @@
     <script src="js/sb-admin.min.js"></script>
     <!-- Custom scripts for this page-->
     <script src="js/sb-admin-datatables.min.js"></script>
+    <script src="js/edit-profile.js"></script>
   </div>
 </body>
 

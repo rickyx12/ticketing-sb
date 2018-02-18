@@ -412,6 +412,7 @@
     <script src="js/show-current-ticket.js"></script>
     <script src="js/show-published-ticket.js"></script>
     <script src="js/show-task-by-ticketno.js"></script>
+    <script src="js/download-print-date.js"></script>
     <script src="js/add-ticket.js"></script>    
   </div>
 </body>

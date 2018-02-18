@@ -218,6 +218,19 @@
             </div>
           </form>
         </li>
+      <!-----XB----> 
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="avatar.png" alt="Avatar" class="avatar">
+          </a>
+          <div class="dropdown-menu" aria-labelledby="alertsDropdown">
+            <a class="dropdown-item" href="register-kite.php">
+              <span class="text-default">
+                  Edit Profile
+              </span>             
+            </a>
+        </li>
+      <!-----XB---->           
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>

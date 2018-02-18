@@ -25,7 +25,6 @@
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <!-- Page level plugin CSS-->
   <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-  <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
 </head>
 
@@ -335,8 +334,8 @@
               <textarea class="form-control" id="activity" style="overflow-x: hidden;" rows="5" cols="2"></textarea>
             </div>
             <div class="form-group">
-              <label>Start Time</label>
-              <input type="text" id="start-time" class="form-control" autocomplete="off">
+              <label>Start time</label>
+              <input type="text" id="start-time" class="form-control" autocomplete="off">      
             </div>
             <div class="form-group">
               <label>End Time</label>
@@ -489,7 +488,7 @@
       </div>
     </div>
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/jquery/jquery.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>

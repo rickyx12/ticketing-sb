@@ -16,12 +16,12 @@ function ticketBtn() {
 				 });
 
 				$('#edit-ticket-btn'+field.id).click(function(){
-					var editSubject = $('#edit-subject').val();
-					var editTitle = $('#edit-title').val();
-					var editActivity = $('#edit-activity').val();
-					var editStart = $('#edit-start').val();
-					var editEnd = $('#edit-end').val();
-					var editRemarks = $('#edit-remarks').val();
+					var editSubject = $('#edit-subject'+field.id).val();
+					var editTitle = $('#edit-title'+field.id).val();
+					var editActivity = $('#edit-activity'+field.id).val();
+					var editStart = $('#edit-start'+field.id).val();
+					var editEnd = $('#edit-end'+field.id).val();
+					var editRemarks = $('#edit-remarks'+field.id).val();
 
 					var data = {
 						id:field.id,
@@ -39,6 +39,7 @@ function ticketBtn() {
 						data:data,
 						success:function(){
 							getTicket('./backend/ticket-json-encoder.php');
+							ticketBtn();
 						}
 					});
 
@@ -122,39 +123,6 @@ $(function(){
 
 	});
 
-	$('#download-date').datepicker({
-		"dateFormat":"yy-mm-dd",
-	    onSelect: function(dateText, inst) {
-
-	    	var selectedDate = $('#download-date').val();
-
-	    	$('#download-ticket-form-table').show();
-	    	$('#download-print-btn').show();
-			getTicketByDate('./backend/date-ticket-json-encoder.php?date='+selectedDate,'#download-ticket-form-body-table');
-	    }		
-	});
-
-	$('#print-date').datepicker({
-		"dateFormat":"yy-mm-dd",
-		onSelect: function(dateText, inst) {
-
-			var selectedDate = $('#print-date').val();
-
-			$('#print-ticket-form-table').show();
-			$('.print-btn').show();
-			getTicketByDate('./backend/date-ticket-json-encoder.php?date='+selectedDate,'#print-ticket-form-body-table');
-
-			$('#view-print-btn').click(function(){
-				$('#print-ticket-form-table').hide();
-				$('#print-view-form-table').show();
-				$('#view-print-btn').hide();
-				getTaskByDate('./backend/task-by-ticket-json-encoder.php?date='+selectedDate,'#print-view-form-body-table');
-			});
-		}
-	});
-
-
-
 	$('#download-print-btn').click(function(){
 		var columns = ["No", "Subject", "Code/Title","Activity","Start Time","End Time","Remarks"];
 		var rows = [];
@@ -171,5 +139,8 @@ $(function(){
 			doc.save('ticket#'+title+'.pdf');					
 		});
 	});
+
+
+	
 
 });
