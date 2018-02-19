@@ -45,6 +45,14 @@ function ticketBtn() {
 
 				});
 
+				$('#edit-start'+field.id).datetimepicker({
+					format:'LT'
+				});
+
+				$('#edit-end'+field.id).datetimepicker({
+					format:'LT'
+				});
+
 			});
 	});
 }
@@ -141,6 +149,12 @@ $(function(){
 	});
 
 
-	
+	$('#start-time').datetimepicker({
+		format:'LT'
+	});
+
+	$('#end-time').datetimepicker({
+		format:'LT'
+	});
 
 });

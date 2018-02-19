@@ -350,7 +350,7 @@
               </div>
               <div class="col-md-12 text-right">
                 <button id="view-print-btn" class="btn btn-default btn-success print-btn">View</button>
-                <button class="btn btn-default btn-danger print-btn">Print</button>
+                <button id="print-print-btn" class="btn btn-default btn-danger print-btn">Print</button>
               </div>
             </div>
             <div class="modal-footer">
@@ -393,6 +393,7 @@
         </div>
       </div>
     </div>
+
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -413,6 +414,7 @@
     <script src="js/show-published-ticket.js"></script>
     <script src="js/show-task-by-ticketno.js"></script>
     <script src="js/download-print-date.js"></script>
+    <script src="js/published-ticket.js"></script>
     <script src="js/add-ticket.js"></script>    
   </div>
 </body>

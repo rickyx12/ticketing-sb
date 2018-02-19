@@ -134,5 +134,18 @@ public function __construct() {
 		($number > 0) ? $x = number_format($number,2) : $x = "";
 		return $x;
 	}
+
+	public function format24hr($time) {
+		$timeShift = preg_split('/\s+/', $time, NULL, PREG_SPLIT_NO_EMPTY);
+		$timeOnly = preg_split ("/\:/", $timeShift[0]);
+		$convertedHour;
+
+		if( $timeShift[1] == "PM" ) {
+			$convertedHour = (int)$timeShift[0] + 12;
+		}else {
+			$convertedHour = $timeShift[0];
+		}
+		return $convertedHour.":".$timeOnly[1].":00";
+	}
 	
 }

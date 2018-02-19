@@ -13,15 +13,14 @@
 	<head>
 		<title>Ticket</title>
 		<script src="vendor/jquery/jquery.min.js"></script>
-		<script src="vendor/jquery-print-preview/js/printPreview.js"></script>
+		<script src="bower_components/jQuery.print/jQuery.print.js"></script>
 		<link rel="stylesheet" type="text/css" href="vendor/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 		<script src="vendor/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>		
 		<link rel="stylesheet" type="text/css" href="css/ticket-form.css">
 		<script>
 			$(document).ready(function(){
-				$("#print-btn").printPreview({
-					obj2print:"#to-print",
-					width:'1000'
+				$("#print-btn").click(function(){
+					$('#to-print').print();
 				});
 			});
 		</script>
@@ -38,16 +37,16 @@
 				</div>
 				<br>
 				<div class="row">
-					<div class="col-md-12">
-						<div class="col-md-6">
+					<div class="col-xs-12">
+						<div class="col-xs-6">
 							<label>NAME:</label>
 							<input type='text' id='name-field' value='<?= $db->selectNow("user","name","id",$db->selectNow("ticket",'employee','ticketNo',$_GET["ticketNo"])) ?>'>
 						</div>
-						<div class="col-md-3">
+						<div class="col-xs-3">
 								<label>SECTION:</label>
 								<input type="text" class="other-field" value="DTU">
 						</div>
-						<div class="col-md-3">
+						<div class="col-xs-3">
 								<label>DATE:</label>
 								<input type="text" class="other-field" value="<?= $db->formatDate($db->selectNow('ticket','datePublished','ticketNo',$_GET['ticketNo'])) ?>">
 						</div>					
@@ -89,21 +88,24 @@
 						</table>
 						<div class="row">
 							<div class="footer">
-								<div class="col-md-4">
+								<div class="col-xs-4">
 									Checked by:
 									<br><br>
 									<input type="text" class="bottom-field">
 									<br>
 									<label class="bottom-field-label">SUPERVISOR</label>
 								</div>
-								<div class="col-md-4">
+								<div class="col-xs-4">
+									
+								</div>
+								<div class="col-xs-4">
 									Checked by:
 									<br><br>
 									<input type="text" class="bottom-field">
 									<br>
 									<label class="bottom-field-label">MANAGER</label>							
 								</div>
-								<div class="col-md-4">
+								<div class="col-xs-4">
 									
 								</div>
 							</div>

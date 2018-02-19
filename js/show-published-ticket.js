@@ -8,7 +8,7 @@ function getPublishedTicket(json) {
 				 tableData += '<tr>';
 				 tableData += '<td>'+field.ticketNo+'</td>';
 				 tableData += '<td>'+field.date+'</td>';
-				 tableData += '<td><a href="./ticket-form.php?ticketNo='+field.ticketNo+'" target="_blank"><button type="button" id="published-view-btn'+field.ticketNo+'" class="btn btn-default">View</button></a> <button id="history-download-btn'+field.ticketNo+'" class="btn btn-default">Download</button> <button class="btn btn-default">Print</button></td>'
+				 tableData += '<td><a href="./ticket-form.php?ticketNo='+field.ticketNo+'" target="_blank"><button type="button" id="published-view-btn'+field.ticketNo+'" class="btn btn-default">View</button></a> <button id="history-download-btn'+field.ticketNo+'" class="btn btn-default">Download</button> <button id="history-print-btn'+field.ticketNo+'" class="btn btn-default">Print</button></td>'
 				 tableData += '</tr>';
 
 				 $(document).on('click','#history-download-btn'+field.ticketNo,function(){
@@ -25,6 +25,15 @@ function getPublishedTicket(json) {
 						doc.save('ticket#'+title+'.pdf');					
 					});
 				 });
+
+				 $(document).on('click','#history-print-btn'+field.ticketNo,function(){
+					  windowObjectReference = window.open(
+					    "./backend/history-print-page.php?ticketNo="+field.ticketNo,
+					    "",
+					    "resizable,scrollbars,status,width=1300,height=650"
+					  );
+				 });
+
 			});
 		}else {
 			tableData += '<tr></tr>';

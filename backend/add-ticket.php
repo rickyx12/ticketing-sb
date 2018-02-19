@@ -10,12 +10,12 @@
 	$remarks = $_POST['remarks'];
 
 	$db = new database();
-
+	
 	$data = array(
 		"subject" => $subject,
 		"title" => $title,
-		"start" => $start,
-		"end" => $end,
+		"start" => $db->format24hr($start),
+		"end" => $db->format24hr($end),
 		"activity" => $activity,
 		"remarks" => $remarks,
 		"employee" => $_SESSION['userId']

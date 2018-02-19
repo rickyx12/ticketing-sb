@@ -15,8 +15,8 @@
 			$data[$ticketId]['id'] = $ticketId;
 			$data[$ticketId]['subject'] = $db->selectNow('ticket','subject','id',$ticketId);
 			$data[$ticketId]['code'] = $db->selectNow('ticket','title','id',$ticketId);
-			$data[$ticketId]['start'] = $db->selectNow('ticket','start','id',$ticketId);
-			$data[$ticketId]['end'] = $db->selectNow('ticket','end','id',$ticketId);
+			$data[$ticketId]['start'] = $db->formatTime($db->selectNow('ticket','start','id',$ticketId));
+			$data[$ticketId]['end'] = $db->formatTime($db->selectNow('ticket','end','id',$ticketId));
 			$data[$ticketId]['activity'] = $db->selectNow('ticket','activity','id',$ticketId);
 			$data[$ticketId]['remarks'] = $db->selectNow('ticket','remarks','id',$ticketId);
 		}

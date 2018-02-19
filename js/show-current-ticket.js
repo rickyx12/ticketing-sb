@@ -61,11 +61,11 @@ function getTicket(json) {
 				 					editModal += "</div>";
 				 					editModal += "<div class='form-group'>";
 				 						editModal += "<label>Start time</label>";
-				 						editModal += "<input type='text' id='edit-start"+field.id+"' class='form-control' autocomplete='off' value='"+field.start+"'>";
+				 						editModal += "<input type='text' id='edit-start"+field.id+"' class='form-control time-picker' autocomplete='off' value='"+field.start+"'>";
 				 					editModal += "</div>";
 				 					editModal += "<div class='form-group'>";
 				 						editModal += "<label>End time</label>";
-				 						editModal += "<input type='text' id='edit-end"+field.id+"' class='form-control' autocomplete='off' value='"+field.end+"'>";
+				 						editModal += "<input type='text' id='edit-end"+field.id+"' class='form-control time-picker' autocomplete='off' value='"+field.end+"'>";
 				 					editModal += "</div>";
 				 					editModal += "<div class='form-group'>";
 				 						editModal += "<label>Remarks</label>";

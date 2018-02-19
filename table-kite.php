@@ -20,9 +20,10 @@
   <meta name="author" content="">
   <title>SB Admin - Start Bootstrap Template</title>
   <!-- Bootstrap core CSS-->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
   <!-- Page level plugin CSS-->
   <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <link href="css/sb-admin.css" rel="stylesheet">
@@ -382,80 +383,6 @@
     <div id="edit-modal-handler"></div>
     <div id="delete-modal-handler"></div>
 
-	<?php if($db->doubleSelectNow('ticket','ticketNo','status','publish','datePublished',date("Y-m-d")) == "" ): ?>
-      <?php if($ticket->getTicket_id() != ""): ?>
-  	    <?php foreach($ticket->getTicket_id() as $id): ?>
-<!--   		    <div id="delete-ticket-modal<?= $id ?>" class="modal fade" role="dialog">
-  		      <div class="modal-dialog">
-
-  		        <div class="modal-content">
-  		          <div class="modal-header">
-  		          	<h5 class="modal-title"><?= $db->selectNow('ticket','subject','id',$id) ?></h5>
-  		          </div>
-  		          <div class="modal-body">
-  		          	<div class="col-md-12 text-center">
-  		          		<h5>Delete <span style='color:red;'><?= $db->selectNow('ticket','title','id',$id) ?></span>?</h5>
-  		          	</div>
-  		          	<Br>
-  		            <div class="col-md-12 text-right">
-  		              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> 
-  		              <button type="button" class="btn btn-danger" id="delete-ticket-btn<?= $id ?>" data-dismiss="modal">Delete</button> 
-  		            </div>           
-  		          </div>
-  		        </div>
-  		      </div>
-  		    </div> -->
-
-<!-- 
-          <div id="edit-ticket-modal<?= $id ?>" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title"><?= $db->selectNow('ticket','subject','id',$id) ?></h5>
-                </div>
-                <div class="modal-body">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label>Subject</label>
-                      <input type="text" id="edit-subject" class="form-control" autocomplete="off" value="<?= $db->selectNow('ticket','subject','id',$id) ?>">
-                    </div>
-                    <div class="form-group">
-                      <label>Code/Title</label>
-                      <input type="text" id="edit-title" class="form-control" autocomplete="off" value="<?= $db->selectNow('ticket','title','id',$id) ?>">
-                    </div>
-                    <div class="form-group">
-                      <label>Activity</label>
-                      <input type="text" id="edit-activity" class="form-control" autocomplete="off" value="<?= $db->selectNow('ticket','activity','id',$id) ?>">
-                    </div>
-                    <div class="form-group">
-                      <label>Start Time</label>
-                      <input type="text" id="edit-start" class="form-control" autocomplete="off" value="<?= $db->selectNow('ticket','start','id',$id) ?>">
-                    </div>
-                    <div class="form-group">
-                      <label>End Time</label>
-                      <input type="text" id="edit-end" class="form-control" autocomplete="off" value="<?= $db->selectNow('ticket','end','id',$id) ?>">
-                    </div>
-                    <div class="form-group">
-                      <label>Remarks</label>
-                      <input type="text" id="edit-remarks" class="form-control" autocomplete="off" value="<?= $db->selectNow('ticket','remarks','id',$id) ?>">
-                    </div>
-                  </div>
-                  <Br>
-                  <div class="col-md-12 text-right">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> 
-                    <button type="button" class="btn btn-success" id="edit-ticket-btn<?= $id ?>" data-dismiss="modal">Update</button> 
-                  </div>           
-                </div>
-              </div>
-
-            </div>
-          </div>    -->     
-  	    <?php endforeach; ?>
-      <?php endif; ?>
-  <?php endif; ?> 
-
-
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
@@ -489,12 +416,15 @@
     </div>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Page level plugin JavaScript-->
     <script src="vendor/datatables/jquery.dataTables.js"></script>
     <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
     <!-- Custom scripts for this page-->
