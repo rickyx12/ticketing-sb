@@ -59,6 +59,9 @@
               <a href="table-kite.php">Current</a>
             </li>
             <li>
+              <a href="#">Unpublished Ticket</a>
+            </li>
+            <li>
               <a href="table-kite-history.php">History</a>
             </li>
           </ul>
@@ -261,7 +264,7 @@
                   <th>Actions</th>
                 </tr>
               </thead>
-              <tbody id="published-ticket-table">
+              <!-- <tbody id="published-ticket-table"> -->
               </tbody>
             </table>
           </div>
@@ -408,7 +411,7 @@
     <script src="vendor/jspdf/jspdf.min.js"></script>
     <script src="vendor/jspdf/jspdf.plugin.autotable.js"></script> 
     <!-- Custom scripts for this page-->
-    <script src="js/sb-admin-datatables.min.js"></script>
+    <script src="js/sb-admin-datatables.js"></script>
     <script src="js/date-ticket.js"></script>
     <script src="js/show-current-ticket.js"></script>
     <script src="js/show-published-ticket.js"></script>

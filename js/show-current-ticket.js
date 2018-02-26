@@ -15,7 +15,7 @@ function getTicket(json) {
 				 tableData += '<td>'+field.start+'</td>';
 				 tableData += '<td>'+field.end+'</td>';
 				 tableData += '<td>'+field.remarks+'</td>';
-				 tableData += '<td><button class="btn btn-default" data-toggle="modal" data-target="#edit-ticket-modal'+field.id+'"><i class="fa fa-pencil"></i></button> <button class="btn btn-danger" data-toggle="modal" data-target="#delete-ticket-modal'+field.id+'"><i class="fa fa-trash"></i></button><input type="checkbox" class="publish" value="'+field.id+'" checked></td>'
+				 tableData += '<td><button class="btn btn-default" data-toggle="modal" data-target="#edit-ticket-modal'+field.id+'"><i class="fa fa-pencil"></i> Edit</button> <button class="btn btn-danger" data-toggle="modal" data-target="#delete-ticket-modal'+field.id+'"><i class="fa fa-trash"></i> Delete</button><input type="checkbox" class="publish" value="'+field.id+'" checked></td>'
 				 tableData += '</tr>';
 
 

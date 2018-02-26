@@ -59,6 +59,9 @@
               <a href="table-kite.php">Current</a>
             </li>
             <li>
+              <a href="#">Unpublished Ticket</a>
+            </li>
+            <li>
               <a href="table-kite-history.php">History</a>
             </li>
           </ul>
@@ -224,7 +227,7 @@
             <img src="avatar.png" alt="Avatar" class="avatar">
           </a>
           <div class="dropdown-menu" aria-labelledby="alertsDropdown">
-            <a class="dropdown-item" href="register-kite.php">
+            <a class="dropdown-item" href="edit.profile.php">
               <span class="text-default">
                   Edit Profile
               </span>             

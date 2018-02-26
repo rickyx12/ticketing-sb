@@ -62,6 +62,9 @@
               <a href="table-kite.php">Current</a>
             </li>
             <li>
+              <a href="#">Unpublished Ticket</a>
+            </li>
+            <li>
               <a href="table-kite-history.php">History</a>
             </li>
           </ul>
@@ -227,7 +230,7 @@
             <img src="avatar.png" alt="Avatar" class="avatar">
           </a>
           <div class="dropdown-menu" aria-labelledby="alertsDropdown">
-            <a class="dropdown-item" href="register-kite.php">
+            <a class="dropdown-item" href="edit.profile.php">
               <span class="text-default">
                   Edit Profile
               </span>             
@@ -244,24 +247,29 @@
   <div class="content-wrapper">
 
     <div class="container-fluid">
-
-    <div class="card card-register mx-auto mt-5">
-      <div class="card-header">Profile Settings</div>
+    <h6>Edit Profile Information</h6>
+    <div class="card card-register mt-2">
+      <!-- <div class="card-header">Profile Settings</div> -->
       <div class="card-body">
+        <span id="message-response" style="color:red; font-size: 12px;">
+          <?php if(isset($_SESSION['profile-message'])): ?>
+            <?= $_SESSION['profile-message'] ?>
+          <?php endif; ?>
+        </span>        
         <form>
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
-                <label for="exampleInputName">User Id</label>
-                <input class="form-control" id="userId" type="text" autocomplete="off" value="<?= $db->selectNow('user','employeeId','id',$_SESSION['userId']) ?>">
+                <label>User ID</label>
+                <h5><?= $db->selectNow('user','employeeId','id',$_SESSION['userId']) ?></h5>
               </div>
             </div>
           </div>          
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
-                <label for="exampleInputName">Name</label>
-                <input class="form-control" id="employee-name" type="text" autocomplete="off" value="<?= $db->selectNow('user','name','id',$_SESSION['userId'
+                <label for="exampleInputName">First Name</label>
+                <input class="form-control" id="employee-first-name" type="text" autocomplete="off" value="<?= $db->selectNow('user','first_name','id',$_SESSION['userId'
                 ]) ?>">
               </div>
             </div>
@@ -269,9 +277,27 @@
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
+                <label for="exampleInputName">Last Name</label>
+                <input class="form-control" id="employee-last-name" type="text" autocomplete="off" value="<?= $db->selectNow('user','last_name','id',$_SESSION['userId'
+                ]) ?>">
+              </div>
+            </div>
+          </div>
+           <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="exampleInputName">Middle Name</label>
+                <input class="form-control" id="employee-middle-name" type="text" autocomplete="off" value="<?= $db->selectNow('user','middle_name','id',$_SESSION['userId'
+                ]) ?>">
+              </div>
+            </div>
+          </div>         
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
                 <span id="message-response" style="color:red; font-size: 12px;">
-                  <?php if(isset($_SESSION['message'])): ?>
-                    <?= $_SESSION['message'] ?>
+                  <?php if(isset($_SESSION['password-message'])): ?>
+                    <?= $_SESSION['password-message'] ?>
                   <?php endif; ?>
                 </span>
                 <Br>
@@ -288,6 +314,62 @@
               </div>            
             </div>
           </div>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="exampleInputPassword1">Division</label>
+                <input class="form-control" id="employee-division" type="text" value="<?= $db->selectNow('user','division','id',$_SESSION['userId']) ?>" autocomplete="off">
+              </div>            
+            </div>
+          </div> 
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="exampleInputPassword1">Department</label>
+                <input class="form-control" id="employee-department" type="text" value="<?= $db->selectNow('user','department','id',$_SESSION['userId']) ?>" autocomplete="off">
+              </div>            
+            </div>
+          </div>  
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="exampleInputPassword1">Section</label>
+                <input class="form-control" id="employee-section" type="text" value="<?= $db->selectNow('user','section','id',$_SESSION['userId']) ?>" autocomplete="off">
+              </div>            
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="exampleInputPassword1">Branch</label>
+                <input class="form-control" id="employee-branch" type="text" value="<?= $db->selectNow('user','branch','id',$_SESSION['userId']) ?>" autocomplete="off">
+              </div>            
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="exampleInputPassword1">Employment Status</label>
+                <select id="employment-status" class="form-control">
+                  <option><?= $db->selectNow('user','employment_status','id',$_SESSION['userId']) ?></option>
+                  <option>Full-time</option>
+                  <option>Probationary</option>
+                  <option>Project-Based</option>
+                  <option>Direct Casual/Contractual</option>
+                  <option>OJT</option>
+                  <option>Agency Contractual</option>
+                </select>
+              </div>            
+            </div>
+          </div>  
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="exampleInputPassword1">Employee Position</label>
+                <input class="form-control" id="employee-position" type="text" value="<?= $db->selectNow('user','position','id',$_SESSION['userId']) ?>" autocomplete="off">
+              </div>            
+            </div>
+          </div>                                                              
           <a class="btn btn-primary btn-block" id="update-profile-btn">Update</a>
         </form>
       </div>

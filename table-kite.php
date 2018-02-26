@@ -68,6 +68,9 @@
               <a href="table-kite.php">Current</a>
             </li>
             <li>
+              <a href="table-kite.php">Unpublished Ticket</a>
+            </li>            
+            <li>
               <a href="table-kite-history.php">History</a>
             </li>
           </ul>
@@ -233,7 +236,7 @@
             <img src="avatar.png" alt="Avatar" class="avatar">
           </a>
           <div class="dropdown-menu" aria-labelledby="alertsDropdown">
-            <a class="dropdown-item" href="register-kite.php">
+            <a class="dropdown-item" href="edit.profile.php">
               <span class="text-default">
                   Edit Profile
               </span>             
@@ -255,13 +258,13 @@
 	        <div class="card-header">
 	          <div class="col-sm-12">
 	            <i class="fa fa-table"></i> Ticket#: DTU-<?= date("Ymd") ?>-<?= $ticket->getLastTicketNo() + 1 ?>
-	            <span class="pull-right"><?= $db->formatDate(date("Y-m-d")) ?></span>
+	            <span class="pull-right"><?= date("F d, Y") ?></span>
 	          </div>
 	        </div>
 		        <div class="card-body">
 		          <div class="row">
 		            <div class="col-md-6">
-		              Ticket#: DTU-<?= date("Ymd") ?>-<?= $ticket->getLastTicketNo() + 1 ?>
+		              Current Ticket: DTU-<?= date("Ymd") ?>-<?= $ticket->getLastTicketNo() + 1 ?>
 		            </div>
 		            <div class="col-md-6 text-right">
 		              <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add-ticket-modal">Add Item</button>
@@ -290,7 +293,7 @@
 			            </div>
 			          </div>
 		        </div>
-	        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+	        <!-- <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div> -->
 	      </div>
 	    </div>
 	<?php else: ?>
