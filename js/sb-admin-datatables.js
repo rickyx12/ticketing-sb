@@ -12,6 +12,7 @@ $(document).ready(function() {
   	"aoColumns":[
 		{mData:'ticketNo'},
 		{mData:'date'},
+		{mData:'title'},
 		{mData:'ticketNo'}
   	],
     "columnDefs": [ {

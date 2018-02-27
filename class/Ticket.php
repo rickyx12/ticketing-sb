@@ -23,10 +23,25 @@
 
 		public function getTicket($employee) {
 			$connection = mysqli_connect($this->host,$this->username,$this->password,$this->database);      
-			$result = mysqli_query($connection, " SELECT id FROM ticket WHERE employee = '$employee' AND status != 'publish' ORDER BY id ASC ") or die("Query fail: " . mysqli_error()); 
+			$result = mysqli_query($connection, " SELECT id FROM ticket WHERE employee = '$employee' AND status NOT IN ('publish','saved') ORDER BY id ASC ") or die("Query fail: " . mysqli_error()); 
 			while($row = mysqli_fetch_array($result))
 			{
 				$this->getTicket_id[] = $row['id'];
+			}	
+		}
+
+		private $getSavedTicket_id;
+
+		public function getSavedTicket_id() {
+			return $this->getSavedTicket_id;
+		}
+
+		public function getSavedTicket($employee) {
+			$connection = mysqli_connect($this->host,$this->username,$this->password,$this->database);      
+			$result = mysqli_query($connection, " SELECT id FROM ticket WHERE employee = '$employee' AND status = 'saved' ORDER BY id ASC ") or die("Query fail: " . mysqli_error()); 
+			while($row = mysqli_fetch_array($result))
+			{
+				$this->getSavedTicket_id[] = $row['id'];
 			}	
 		}
 

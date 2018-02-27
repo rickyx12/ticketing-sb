@@ -15,6 +15,7 @@
 			foreach($ticket->getPublishedTicketUser_ticketNo() as $ticketNo) {
 				$data[$ticketNo]['ticketNo'] = $ticketNo;
 				$data[$ticketNo]['date'] = $db->formatDate($db->selectNow('ticket','datePublished','ticketNo',$ticketNo));
+				$data[$ticketNo]['employeeName'] = $db->selectNow('ticket','employeeFormatted','ticketNo',$ticketNo);
 			}
 			echo json_encode($data);
 		}else { 
@@ -27,7 +28,7 @@
 			foreach($ticket->getPublishedTicketAdmin_ticketNo() as $ticketNo) {
 				$data[$ticketNo]['ticketNo'] = $ticketNo;
 				$data[$ticketNo]['date'] = $db->formatDate($db->selectNow('ticket','datePublished','ticketNo',$ticketNo));
-				$data[$ticketNo]['employee'] = $db->selectNow('user','name','id',$db->selectNow('ticket','employee','ticketNo',$ticketNo));
+				$data[$ticketNo]['employeeName'] = $db->selectNow('ticket','employeeFormatted','ticketNo',$ticketNo);
 			}
 			echo json_encode($data);
 		}else {

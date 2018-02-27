@@ -1,8 +1,12 @@
 <?php 
   require_once 'session/session.php'; 
   require 'class/database.php';
+  require 'class/Ticket.php';
 
   $db = new database();
+  $ticket = new Ticket();
+
+  $ticket->getTicket($_SESSION['userId']);
 
 ?>
 <!DOCTYPE html>
@@ -16,19 +20,19 @@
   <meta name="author" content="">
   <title>SB Admin - Start Bootstrap Template</title>
   <!-- Bootstrap core CSS-->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
   <!-- Page level plugin CSS-->
   <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-  <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+    <a class="navbar-brand" href="index.php">Start Bootstrap</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -41,13 +45,15 @@
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="charts.html">
+          <!-- <a class="nav-link" href="charts.html"> -->
+          <a class="nav-link" href="#">
             <i class="fa fa-fw fa-area-chart"></i>
             <span class="nav-link-text">Charts</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="tables.html">
+          <!-- <a class="nav-link" href="tables.html"> -->
+          <a class="nav-link" href="#">
             <i class="fa fa-fw fa-table"></i>
             <span class="nav-link-text">Tables</span>
           </a>
@@ -57,13 +63,13 @@
             <i class="fa fa-fw fa-wrench"></i>
             <span class="nav-link-text">Ticket</span>
           </a>
-          <ul class="sidenav-second-level collapse" id="collapseComponents">
+          <ul class="sidenav-second-level collapse show" id="collapseComponents">
             <li>
               <a href="table-kite.php">Current</a>
             </li>
             <li>
               <a href="saved-ticket.php">Unpublished Ticket</a>
-            </li>
+            </li>            
             <li>
               <a href="table-kite-history.php">History</a>
             </li>
@@ -236,7 +242,7 @@
               </span>             
             </a>
         </li>
-      <!-----XB---->      
+      <!-----XB---->               
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
@@ -245,138 +251,79 @@
     </div>
   </nav>
   <div class="content-wrapper">
-
-    <div class="container-fluid">
-    <h6>Edit Profile Information</h6>
-    <div class="card card-register mt-2">
-      <!-- <div class="card-header">Profile Settings</div> -->
-      <div class="card-body">
-        <span id="message-response" style="color:red; font-size: 12px;">
-          <?php if(isset($_SESSION['profile-message'])): ?>
-            <?= $_SESSION['profile-message'] ?>
-          <?php endif; ?>
-        </span>        
-        <form>
-          <div class="form-group">
-            <div class="form-row">
+  
+    <div id="allow" class="container-fluid">
+      <!-- Example DataTables Card-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <div class="col-sm-12">
+            <span class="pull-right"><?= date("F d, Y") ?></span>
+          </div>
+        </div>
+          <div class="card-body">
+            <div class="row">
               <div class="col-md-6">
-                <label>User ID</label>
-                <h5><?= $db->selectNow('user','employeeId','id',$_SESSION['userId']) ?></h5>
+                <!-- Current Ticket: DTU-<?= date("Ymd") ?>-<?= $ticket->getLastTicketNo() + 1 ?> -->
+              </div>
+              <div class="col-md-6 text-right">
+                <!-- <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add-ticket-modal">Add Item</button> -->
               </div>
             </div>
-          </div>          
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <label for="exampleInputName">First Name</label>
-                <input class="form-control" id="employee-first-name" type="text" autocomplete="off" value="<?= $db->selectNow('user','first_name','id',$_SESSION['userId'
-                ]) ?>">
+            <br>
+              <div class="table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>No.</th>
+                      <th>Subject</th>
+                      <th>Code/Title</th>
+                      <th>Activity</th>
+                      <th>Start Time</th>
+                      <th>End Time</th>
+                      <th>Remarks</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="saved-ticket-table"></tbody>
+                </table>
+                <div class="col-md-12 text-right">
+                 <!--  <button class="btn btn-success" data-toggle="modal" data-target="#save-ticket-modal"><i class="fa fa-save"></i> Save</button>
+                  <button class="btn btn-info" data-toggle="modal" data-target="#publish-ticket-modal"><i class="fa fa-check"></i> Publish</button> -->
+                </div>
               </div>
-            </div>
           </div>
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <label for="exampleInputName">Last Name</label>
-                <input class="form-control" id="employee-last-name" type="text" autocomplete="off" value="<?= $db->selectNow('user','last_name','id',$_SESSION['userId'
-                ]) ?>">
-              </div>
-            </div>
-          </div>
-           <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <label for="exampleInputName">Middle Name</label>
-                <input class="form-control" id="employee-middle-name" type="text" autocomplete="off" value="<?= $db->selectNow('user','middle_name','id',$_SESSION['userId'
-                ]) ?>">
-              </div>
-            </div>
-          </div>         
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <span id="message-response" style="color:red; font-size: 12px;">
-                  <?php if(isset($_SESSION['password-message'])): ?>
-                    <?= $_SESSION['password-message'] ?>
-                  <?php endif; ?>
-                </span>
-                <Br>
-                <label for="exampleInputPassword1">Current Password</label>
-                <input class="form-control" id="current-password" type="password">
-              </div>            
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <label for="exampleInputPassword1">New Password</label>
-                <input class="form-control" id="new-password" type="password">
-              </div>            
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <label for="exampleInputPassword1">Division</label>
-                <input class="form-control" id="employee-division" type="text" value="<?= $db->selectNow('user','division','id',$_SESSION['userId']) ?>" autocomplete="off">
-              </div>            
-            </div>
-          </div> 
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <label for="exampleInputPassword1">Department</label>
-                <input class="form-control" id="employee-department" type="text" value="<?= $db->selectNow('user','department','id',$_SESSION['userId']) ?>" autocomplete="off">
-              </div>            
-            </div>
-          </div>  
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <label for="exampleInputPassword1">Section</label>
-                <input class="form-control" id="employee-section" type="text" value="<?= $db->selectNow('user','section','id',$_SESSION['userId']) ?>" autocomplete="off">
-              </div>            
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <label for="exampleInputPassword1">Branch</label>
-                <input class="form-control" id="employee-branch" type="text" value="<?= $db->selectNow('user','branch','id',$_SESSION['userId']) ?>" autocomplete="off">
-              </div>            
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <label for="exampleInputPassword1">Employment Status</label>
-                <select id="employment-status" class="form-control">
-                  <option><?= $db->selectNow('user','employment_status','id',$_SESSION['userId']) ?></option>
-                  <option>Full-time</option>
-                  <option>Probationary</option>
-                  <option>Project-Based</option>
-                  <option>Direct Casual/Contractual</option>
-                  <option>OJT</option>
-                  <option>Agency Contractual</option>
-                </select>
-              </div>            
-            </div>
-          </div>  
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <label for="exampleInputPassword1">Employee Position</label>
-                <input class="form-control" id="employee-position" type="text" value="<?= $db->selectNow('user','position','id',$_SESSION['userId']) ?>" autocomplete="off">
-              </div>            
-            </div>
-          </div>                                                              
-          <a class="btn btn-primary btn-block" id="update-profile-btn">Update</a>
-        </form>
+        <!-- <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div> -->
       </div>
     </div>
-      
+
+
+    <div id="publish-ticket-modal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+         <div class="modal-header">
+          <h6 class="modal-title">Publish</h6>
+         </div>
+          <div class="modal-body">
+            <div class="col-md-12 text-center">
+              Are you sure you want to publish this ticket?
+            </div>
+            <br>
+            <br>
+            <div class="col-md-12 text-right">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> 
+              <button type="button" class="btn btn-success" id="publish-ticket-btn" data-dismiss="modal">Publish</button> 
+            </div>           
+          </div>
+        </div>
+
+      </div>
     </div>
-    </div>
+
+
+    <div id="edit-modal-handler"></div>
+    <div id="delete-modal-handler"></div>
 
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
@@ -410,18 +357,22 @@
       </div>
     </div>
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Page level plugin JavaScript-->
     <script src="vendor/datatables/jquery.dataTables.js"></script>
     <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
     <!-- Custom scripts for this page-->
     <script src="js/sb-admin-datatables.min.js"></script>
-    <script src="js/edit-profile.js"></script>
+    <script src="js/show-saved-ticket.js"></script>
+    <script src="js/saved-ticket.js"></script>
   </div>
 </body>
 

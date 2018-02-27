@@ -68,7 +68,7 @@
               <a href="table-kite.php">Current</a>
             </li>
             <li>
-              <a href="table-kite.php">Unpublished Ticket</a>
+              <a href="saved-ticket.php">Unpublished Ticket</a>
             </li>            
             <li>
               <a href="table-kite-history.php">History</a>
@@ -288,7 +288,7 @@
 			              <tbody id="ticket-table"></tbody>
 			            </table>
 			            <div class="col-md-12 text-right">
-			              <button class="btn btn-success"><i class="fa fa-save"></i> Save</button>
+			              <button class="btn btn-success" data-toggle="modal" data-target="#save-ticket-modal"><i class="fa fa-save"></i> Save</button>
 			              <button class="btn btn-info" data-toggle="modal" data-target="#publish-ticket-modal"><i class="fa fa-check"></i> Publish</button>
 			            </div>
 			          </div>
@@ -376,6 +376,31 @@
             <div class="col-md-12 text-right">
               <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> 
               <button type="button" class="btn btn-success" id="publish-ticket-btn" data-dismiss="modal">Publish</button> 
+            </div>           
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div id="save-ticket-modal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+         <div class="modal-header">
+          <h6 class="modal-title">Saved</h6>
+         </div>
+          <div class="modal-body">
+            <div class="col-md-12 text-center">
+              Are you sure you want to saved this ticket?
+            </div>
+            <br>
+            <br>
+            <div class="col-md-12 text-right">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> 
+              <button type="button" class="btn btn-success" id="save-ticket-btn" data-dismiss="modal">Save</button> 
             </div>           
           </div>
         </div>

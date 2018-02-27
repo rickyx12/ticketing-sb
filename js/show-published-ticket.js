@@ -15,14 +15,41 @@ function getPublishedTicket(json) {
 					var columns = ["No", "Subject", "Code/Title","Activity","Start Time","End Time","Remarks"];
 					var rows = [];
 					var title = field.ticketNo;
+					var employeeName = field.employeeName;
+					var ticketDate = field.date;
+
 					$.getJSON("./backend/by-ticketNo-json-encoder.php?ticketNo="+field.ticketNo,'',function(result) {
 						
 						$.each(result,function(i,field){
-							rows.push([field.id,field.subject,field.code,field.activity,field.start,field.end,field.remarks]);
-						});				
-						var doc = new jsPDF('p', 'pt');
-						doc.autoTable(columns, rows);
-						doc.save('ticket#'+title+'.pdf');					
+							rows.push([field.id,field.subject,field.title,field.activity,field.start,field.end,field.remarks]);
+						});		
+						
+						var logo = new Image();
+						logo.addEventListener('load',function(){
+							var doc = new jsPDF('p', 'pt');
+							doc.addImage(logo, 'JPEG', 70, 20, 100, 50);
+							doc.setFontSize(10);
+							doc.text("Ticket#: "+title,450,30);
+							doc.setFontSize(15);
+							doc.text("DAILY PRODUCTION WORK TICKET",180,50);
+							doc.setFontSize(10);
+							doc.text("Name: "+employeeName,40,90);
+							doc.text("Section: DTU",280,90);
+							doc.text("Date: "+ticketDate,465,90);
+							doc.text("Checked By:",90,770);
+							doc.text("_____________________________",40,800);
+							doc.text("SUPERVISOR",90,820);
+							doc.text("Checked By:",440,770);
+							doc.text("_____________________________",390,800);
+							doc.text("MANAGER",440,820);
+							doc.autoTable(columns, rows,{
+								margin:{
+									top:100
+								}
+							});
+							doc.save('ticket#'+title+'.pdf');		
+						});	
+						logo.src = './img/kite.jpeg';				
 					});
 				 });
 

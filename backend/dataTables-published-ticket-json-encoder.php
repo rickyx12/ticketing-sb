@@ -15,7 +15,7 @@
 		foreach($ticket->getPublishedTicketUser_ticketNo() as $ticketNo) {
 			//$data['ticketNo'] = $ticketNo;
 			//$data['date'] = $db->formatDate($db->selectNow('ticket','datePublished','ticketNo',$ticketNo));
-			array_push($data,array("ticketNo" => $ticketNo, "date" => $db->formatDate($db->selectNow('ticket','datePublished','ticketNo',$ticketNo))));
+			array_push($data,array("ticketNo" => $ticketNo, "date" => $db->formatDate($db->selectNow('ticket','datePublished','ticketNo',$ticketNo)),"title" => $db->selectNow('ticket','title','ticketNo',$ticketNo)));
 		}
 
 		$results = array(

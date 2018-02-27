@@ -59,7 +59,7 @@
               <a href="table-kite.php">Current</a>
             </li>
             <li>
-              <a href="#">Unpublished Ticket</a>
+              <a href="saved-ticket.php">Unpublished Ticket</a>
             </li>
             <li>
               <a href="table-kite-history.php">History</a>
@@ -227,7 +227,7 @@
             <img src="avatar.png" alt="Avatar" class="avatar">
           </a>
           <div class="dropdown-menu" aria-labelledby="alertsDropdown">
-            <a class="dropdown-item" href="register-kite.php">
+            <a class="dropdown-item" href="edit.profile.php">
               <span class="text-default">
                   Edit Profile
               </span>             
@@ -261,6 +261,7 @@
                 <tr>
                   <th>Ticket No</th>
                   <th>Date</th>
+                  <th>Code/Title</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -269,7 +270,7 @@
             </table>
           </div>
         </div>
-        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        <!-- <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div> -->
       </div>
     </div>
 

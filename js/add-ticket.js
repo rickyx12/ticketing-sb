@@ -131,6 +131,34 @@ $(function(){
 
 	});
 
+
+	$('#save-ticket-btn').click(function(){
+
+		var chkArray = [];
+		
+		$(".publish:checked").each(function() {
+			chkArray.push($(this).val());
+		});
+		
+		console.log(chkArray);
+		
+		var selected;
+		selected = chkArray.join(',') ;
+		$.ajax({
+			url:'./backend/save.php',
+			type:'POST',
+			data:{ids:selected},
+			success:function(){
+				$('#allow').hide();
+				// $('#not-allow').show();
+				// getPublishedTicket('./backend/published-ticket-json-encoder.php');
+			}
+		});
+
+	});
+
+
+
 	$('#download-print-btn').click(function(){
 		var columns = ["No", "Subject", "Code/Title","Activity","Start Time","End Time","Remarks"];
 		var rows = [];
