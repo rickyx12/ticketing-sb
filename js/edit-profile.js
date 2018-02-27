@@ -1,5 +1,7 @@
 $(function(){
 
+	$('#upload-photo').hide();
+
 	$('#update-profile-btn').click(function(){
 		
 		var userId = $('#userId').val();
@@ -40,6 +42,11 @@ $(function(){
 			}
 		});		
 
+	});
+
+
+	$('#upload-photo').click(function(){
+		console.log("clickeedd");
 	});
 
 });

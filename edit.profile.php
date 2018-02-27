@@ -256,7 +256,6 @@
             <?= $_SESSION['profile-message'] ?>
           <?php endif; ?>
         </span>        
-        <form>
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
@@ -264,7 +263,17 @@
                 <h5><?= $db->selectNow('user','employeeId','id',$_SESSION['userId']) ?></h5>
               </div>
             </div>
-          </div>          
+          </div>    
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <img id="user-photo" src="img/avatar.png" width="125" height="100">
+                 <button id="upload-photo" class="btn btn-default btn-sm">Update</button>
+                <br>
+                <input type="file" name="photo" onchange="readURL(this);">
+              </div>
+            </div>
+          </div>      
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
@@ -371,7 +380,7 @@
             </div>
           </div>                                                              
           <a class="btn btn-primary btn-block" id="update-profile-btn">Update</a>
-        </form>
+  
       </div>
     </div>
       
@@ -421,6 +430,7 @@
     <script src="js/sb-admin.min.js"></script>
     <!-- Custom scripts for this page-->
     <script src="js/sb-admin-datatables.min.js"></script>
+    <script src="js/photo-preview.js"></script>
     <script src="js/edit-profile.js"></script>
   </div>
 </body>
