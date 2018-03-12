@@ -22,11 +22,17 @@
 		</script>
 	</head>
 	<body>
-		<div id="to-print">
+		<div id="to-print" id="content">
 			<div class="container">
 				<div class="row">
+					<div class="col-sm-12 text-right">
+						<h6 style="margin-right: 20%;">Ticket#: <?= $_GET['ticketNo'] ?></h6>
+					</div>
+				</div>
+				<div class="row">
 					<div class="col-md-12 text-center">
-						<h3>DAILY PRODUCTION WORK TICKET</h3>
+						<img src="kite.png" width="150" height="60" style="margin-right: 5%;">
+						<span style="margin-right: 25%;">DAILY PRODUCTION WORK TICKET</span>
 					</div>
 				</div>
 				<br>
@@ -38,11 +44,11 @@
 						</div>
 						<div class="col-xs-3">
 								<label>SECTION:</label>
-								<input type="text" class="other-field" value="DTU">
+								<input type="text" class="other-field" value="<?= $db->selectNow("user","section","id",$db->selectNow("ticket",'employee','ticketNo',$_GET["ticketNo"])) ?>">
 						</div>
 						<div class="col-xs-3">
 								<label>DATE:</label>
-								<input type="text" class="other-field" value="<?= $db->formatDate($db->selectNow('ticket','datePublished','ticketNo',$_GET['ticketNo'])) ?>">
+								<input type="text" class="other-field" value="<?= $db->selectNow('ticket','dateFormatted','ticketNo',$_GET['ticketNo']) ?>">
 						</div>					
 						<table class="table table-bordered">
 							<thead>
@@ -110,6 +116,6 @@
 		</div>
 	</body>
 	<script>
-		window.close();
+		//window.close();
 	</script>
 </html>

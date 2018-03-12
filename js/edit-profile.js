@@ -1,6 +1,8 @@
 $(function(){
 
 	$('#upload-photo').hide();
+	$('#current-password-text').hide();
+	$('#hide-password-btn').hide();
 
 	$('#update-profile-btn').click(function(){
 		
@@ -45,8 +47,43 @@ $(function(){
 	});
 
 
-	$('#upload-photo').click(function(){
-		console.log("clickeedd");
+	$('#show-password-btn').click(function(){
+		$('#current-password-password').hide();
+		$('#current-password-text').show();
+		$('#show-password-btn').hide();
+		$('#hide-password-btn').show();
 	});
+
+	$('#hide-password-btn').click(function(){
+		$('#current-password-password').show();
+		$('#current-password-text').hide();
+		$('#show-password-btn').show();
+		$('#hide-password-btn').hide();
+	});
+
+	$('#new-password').keyup(updateCount);
+	$('#new-password').keydown(updateCount);
+
+	function updateCount() {
+	    var cs = $(this).val().length;
+	    console.log(cs);
+	    if(cs >= 6) {
+	    	$('#new-password-limiter').hide();
+	    }else {
+	    	$('#new-password-limiter').show();
+	    }
+	}
+
+	// $('#upload-photo').click(function(){
+	// 	$.ajax({
+	// 		url:'./backend/upload-photo.php',
+	// 		type:'POST',
+	// 		data:{fileToUpload:},
+	// 		success:function(){
+	// 			getTicket('./backend/ticket-json-encoder.php');
+	// 			ticketBtn();
+	// 		}
+	// 	});
+	// });
 
 });

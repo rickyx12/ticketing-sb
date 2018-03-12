@@ -227,7 +227,12 @@
       <!-----XB----> 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img src="avatar.png" alt="Avatar" class="avatar">
+            <?php if($db->selectNow('user','photo_path','id',$_SESSION['userId']) != ""): ?>
+              <img src="<?= "user_photos/".$db->selectNow('user','photo_path','id',$_SESSION['userId']) ?>" alt="Avatar" class="avatar">
+            <?php else: ?>
+              <img src="avatar.png" class="avatar">
+            <?php endif; ?>
+
           </a>
           <div class="dropdown-menu" aria-labelledby="alertsDropdown">
             <a class="dropdown-item" href="edit.profile.php">
@@ -267,10 +272,18 @@
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
-                <img id="user-photo" src="img/avatar.png" width="125" height="100">
-                 <button id="upload-photo" class="btn btn-default btn-sm">Update</button>
+                <form method="post" action="backend/upload-photo.php" enctype="multipart/form-data">
+
+                  <?php if($db->selectNow('user','photo_path','id',$_SESSION['userId']) != ""): ?>
+                    <img id="user-photo" src="user_photos/<?= $db->selectNow('user','photo_path','id',$_SESSION['userId']) ?>" class="avatar">
+                  <?php else: ?>
+                    <img id="user-photo" src="img/avatar.png" class="avatar">
+                  <?php endif; ?>
+                  <input type="submit" id="upload-photo" class="btn btn-default btn-sm" value="Update">
+                  <br>
+                  <input type="file" name="fileToUpload" class="btn btn-default btn-sm" style="margin-top: 2%; margin-left: -3%;" onchange="readURL(this);">
+                </form>
                 <br>
-                <input type="file" name="photo" onchange="readURL(this);">
               </div>
             </div>
           </div>      
@@ -311,7 +324,12 @@
                 </span>
                 <Br>
                 <label for="exampleInputPassword1">Current Password</label>
-                <input class="form-control" id="current-password" type="password">
+                <input class="form-control" id="current-password-password" type="password" value="<?= $db->encrypt_decrypt(($db->selectNow('user','password','id',$_SESSION['userId'])),'d') ?>">
+                
+                <input class="form-control" id="current-password-text" type="text" value="<?= $db->encrypt_decrypt(($db->selectNow('user','password','id',$_SESSION['userId'])),'d') ?>">
+                
+                <button id="show-password-btn" class="btn btn-default btn-sm" style="margin-top: 1%;">Show password</button>
+                <button id="hide-password-btn" class="btn btn-default btn-sm" style="margin-top: 1%;">Hide password</button>
               </div>            
             </div>
           </div>
@@ -319,7 +337,7 @@
             <div class="form-row">
               <div class="col-md-6">
                 <label for="exampleInputPassword1">New Password</label>
-                <input class="form-control" id="new-password" type="password">
+                <input class="form-control" id="new-password" type="password"> <span id="new-password-limiter" style="color:red; font-size:15px;">Minimum of 6 character</span>
               </div>            
             </div>
           </div>

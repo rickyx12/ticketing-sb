@@ -1,4 +1,10 @@
-<?php require_once 'session/session.php' ?>
+  <?php 
+    require_once 'session/session.php';
+    require 'class/database.php';
+
+    $db = new database();
+ ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -224,7 +230,11 @@
       <!-----XB----> 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img src="avatar.png" alt="Avatar" class="avatar">
+            <?php if($db->selectNow('user','photo_path','id',$_SESSION['userId']) != ""): ?>
+              <img src="<?= "user_photos/".$db->selectNow('user','photo_path','id',$_SESSION['userId']) ?>" alt="Avatar" class="avatar">
+            <?php else: ?>
+              <img src="avatar.png" class="avatar">
+            <?php endif; ?>
           </a>
           <div class="dropdown-menu" aria-labelledby="alertsDropdown">
             <a class="dropdown-item" href="edit.profile.php">

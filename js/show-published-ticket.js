@@ -12,16 +12,17 @@ function getPublishedTicket(json) {
 				 tableData += '</tr>';
 
 				 $(document).on('click','#history-download-btn'+field.ticketNo,function(){
-					var columns = ["No", "Subject", "Code/Title","Activity","Start Time","End Time","Remarks"];
+					var columns = ["Subject", "Code/Title","Activity","Start Time","End Time","Remarks"];
 					var rows = [];
 					var title = field.ticketNo;
 					var employeeName = field.employeeName;
-					var ticketDate = field.date;
+					var ticketDate = field.dateFormatted;
+					var userSection = field.userSection;
 
 					$.getJSON("./backend/by-ticketNo-json-encoder.php?ticketNo="+field.ticketNo,'',function(result) {
 						
 						$.each(result,function(i,field){
-							rows.push([field.id,field.subject,field.title,field.activity,field.start,field.end,field.remarks]);
+							rows.push([field.subject,field.title,field.activity,field.start,field.end,field.remarks]);
 						});		
 						
 						var logo = new Image();
@@ -34,8 +35,8 @@ function getPublishedTicket(json) {
 							doc.text("DAILY PRODUCTION WORK TICKET",180,50);
 							doc.setFontSize(10);
 							doc.text("Name: "+employeeName,40,90);
-							doc.text("Section: DTU",280,90);
-							doc.text("Date: "+ticketDate,465,90);
+							doc.text("Section: "+userSection,280,90);
+							doc.text("Date: "+ticketDate,440,90);
 							doc.text("Checked By:",90,770);
 							doc.text("_____________________________",40,800);
 							doc.text("SUPERVISOR",90,820);

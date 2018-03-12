@@ -5,11 +5,9 @@
 
 	$db = new database();
 
-	$userId = $_POST['userId'];
 	$employeeFirstName = $_POST['employeeFirstName'];
 	$employeeLastName = $_POST['employeeLastName'];
 	$employeeMiddleName = $_POST['employeeMiddleName'];
-	$currentPassword = $_POST['currentPassword'];
 	$newPassword = $_POST['newPassword'];
 	$employeeDivision = $_POST['employeeDivision'];
 	$employeeDepartment = $_POST['employeeDepartment'];
@@ -19,7 +17,7 @@
 	$employeePosition = $_POST['employeePosition'];
 
 
-	$db->editNow('user','id',$_SESSION['userId'],'employeeId',$userId);
+	// $db->editNow('user','id',$_SESSION['userId'],'employeeId',$userId);
 	$db->editNow('user','id',$_SESSION['userId'],'first_name',$employeeFirstName);
 	$db->editNow('user','id',$_SESSION['userId'],'last_name',$employeeLastName);
 	$db->editNow('user','id',$_SESSION['userId'],'middle_name',$employeeMiddleName);
@@ -32,14 +30,16 @@
 	$db->editNow('user','id',$_SESSION['userId'],'position',$employeePosition);
 	$_SESSION['profile-message'] = "Profile Updated";
 
-	if( $currentPassword != "" && $newPassword != "" ) { 
-		$hashedPassword = $db->selectNow('user','password','id',$_SESSION['userId']);
-		if(Bcrypt::checkPassword($currentPassword, $hashedPassword)) {
-			$db->editNow('user','id',$_SESSION['userId'],'password',Bcrypt::hashPassword($newPassword));
-			$_SESSION['password-message'] = "Password Updated";
-		}else {
-			$_SESSION['password-message'] = "Password Mismatch";
-		}
+	if( $newPassword != "" ) { 
+		$db->editNow("user",'id',$_SESSION['userId'],"password",$db->encrypt_decrypt($newPassword,'e'));
+		$_SESSION['password-message'] = "Password Updated";
+		// $hashedPassword = $db->selectNow('user','password','id',$_SESSION['userId']);
+		// if(Bcrypt::checkPassword($currentPassword, $hashedPassword)) {
+		// 	$db->editNow('user','id',$_SESSION['userId'],'password',Bcrypt::hashPassword($newPassword));
+		// 	$_SESSION['password-message'] = "Password Updated";
+		// }else {
+		// 	$_SESSION['password-message'] = "Password Mismatch";
+		// }
 	}else {
 
 	}

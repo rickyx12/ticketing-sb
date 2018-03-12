@@ -11,9 +11,8 @@
 	$hashedPassword = $db->selectNow('user','password','employeeId',$userId);
 
 	if($db->selectNow('user','id','employeeId',$userId) != "") {
-		if(Bcrypt::checkPassword($password,$hashedPassword)) {
-			$_SESSION['userId'] = $db->selectNow('user','id','employeeId',$userId);
-			
+		if($db->selectNow("user",'id',"employeeId",$userId) != "" && $db->selectNow("user","id","password",$db->encrypt_decrypt($password)) != "") {
+			$_SESSION['userId'] = $db->selectNow('user','id','employeeId',$userId);			
 			if($db->selectNow('user','role','employeeId',$userId) == "user") {
 				header("Location: ../index.php");
 			}else {
