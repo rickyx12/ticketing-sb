@@ -3,6 +3,7 @@ $(function(){
 	$('#upload-photo').hide();
 	$('#current-password-text').hide();
 	$('#hide-password-btn').hide();
+	$('#alphanumeric-checker').hide();
 
 	$('#update-profile-btn').click(function(){
 		
@@ -64,15 +65,36 @@ $(function(){
 	$('#new-password').keyup(updateCount);
 	$('#new-password').keydown(updateCount);
 
+
 	function updateCount() {
 	    var cs = $(this).val().length;
-	    console.log(cs);
 	    if(cs >= 6) {
-	    	$('#new-password-limiter').hide();
+			var alNumRegex = /^([a-zA-Z0-9]+)$/; //only letters and numbers
+			if(alNumRegex.test($('#new-password').val())) {
+			   $('#new-password-limiter').hide();
+			   $('#alphanumeric-checker').hide();
+			}else {
+			   $('#alphanumeric-checker').show();
+			}	    	
 	    }else {
 	    	$('#new-password-limiter').show();
+	    	$('#alphanumeric-checker').hide();
 	    }
 	}
+
+	// $('#new-password').keydown(function(){
+	// 		//var reg_password1 = 'test123#';
+	// 		var reg_password1 = $('#new-password').val();
+	// 		var letters = /^[a-zA-Z0-9]+$/;
+	// 		var result = letters.test(reg_password1);
+	// 		console.log(result);	
+	// });
+
+	// $('#new-password').keydown(function(){
+	// 	var letters = /^[a-zA-Z0-9]+$/;
+	// 	var result = letters.test($('#new-password').val());
+	// 	console.log(result);	
+	// });
 
 	// $('#upload-photo').click(function(){
 	// 	$.ajax({

@@ -24,6 +24,7 @@
   <!-- Custom fonts for this template-->
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
+  <link href="vendor/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet" type="text/css">
   <!-- Page level plugin CSS-->
   <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <link href="css/sb-admin.css" rel="stylesheet">
@@ -278,13 +279,8 @@
                 <table class="table table-bordered" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>No.</th>
-                      <th>Subject</th>
-                      <th>Code/Title</th>
-                      <th>Activity</th>
-                      <th>Start Time</th>
-                      <th>End Time</th>
-                      <th>Remarks</th>
+                      <th>Ticket No.</th>
+                      <th>Date</th>
                       <th></th>
                     </tr>
                   </thead>
@@ -328,6 +324,8 @@
 
     <div id="edit-modal-handler"></div>
     <div id="delete-modal-handler"></div>
+    <div id="view-modal-handler"></div>
+    <div id="publish-modal-handler"></div>
 
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
@@ -371,6 +369,7 @@
     <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
     <script src="bower_components/moment/moment.js"></script>
     <script src="vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="vendor/jquery-ui-1.12.1/jquery-ui.min.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
     <!-- Custom scripts for this page-->

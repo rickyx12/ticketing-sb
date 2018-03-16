@@ -118,10 +118,13 @@ $(function(){
 		
 		var selected;
 		selected = chkArray.join(',') ;
+
+		var ticketNo = $('#ticketNo').val();
+
 		$.ajax({
 			url:'./backend/publish.php',
 			type:'POST',
-			data:{ids:selected},
+			data:{ids:selected, ticketNo: ticketNo},
 			success:function(){
 				$('#allow').hide();
 				$('#not-allow').show();
@@ -144,14 +147,18 @@ $(function(){
 		
 		var selected;
 		selected = chkArray.join(',') ;
+
+		var ticketNo = $('#ticketNo').val();
+
 		$.ajax({
 			url:'./backend/save.php',
 			type:'POST',
-			data:{ids:selected},
+			data:{ids:selected,ticketNo:ticketNo},
 			success:function(){
-				$('#allow').hide();
-				// $('#not-allow').show();
-				// getPublishedTicket('./backend/published-ticket-json-encoder.php');
+				$('#allow').show();
+				$('#not-allow').hide();
+				getTicket('./backend/ticket-json-encoder.php');
+				ticketBtn();
 			}
 		});
 

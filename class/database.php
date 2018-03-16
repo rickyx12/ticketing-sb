@@ -127,6 +127,29 @@ public function __construct() {
 			return $month[$date1[1]]." ".$date1[2].", ".$date1[0];
 		}
 	}
+
+	public function formatCompleteDate($date) {
+		if( $date == "" ) {
+			return "";
+		}else {
+			$date1 = preg_split ("/\-/", $date); 
+			$month = [
+					'01'=>'January',
+					'02'=>'February',
+					'03'=>'March',
+					'04'=>'April',
+					'05'=>'May',
+					'06'=>'June',
+					'07'=>'July',
+					'08'=>'August',
+					'09'=>'September',
+					'10'=>'October',
+					'11'=>'November',
+					'12'=>'December'];
+			return $month[$date1[1]]." ".$date1[2].", ".$date1[0];
+		}
+	}
+
 	public function formatTime($time) {
 		return date('h:i A', strtotime($time));
 	}

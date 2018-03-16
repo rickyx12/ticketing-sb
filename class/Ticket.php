@@ -30,18 +30,18 @@
 			}	
 		}
 
-		private $getSavedTicket_id;
+		private $getSavedTicket_ticketNo;
 
-		public function getSavedTicket_id() {
-			return $this->getSavedTicket_id;
+		public function getSavedTicket_ticketNo() {
+			return $this->getSavedTicket_ticketNo;
 		}
 
 		public function getSavedTicket($employee) {
 			$connection = mysqli_connect($this->host,$this->username,$this->password,$this->database);      
-			$result = mysqli_query($connection, " SELECT id FROM ticket WHERE employee = '$employee' AND status = 'saved' ORDER BY id ASC ") or die("Query fail: " . mysqli_error()); 
+			$result = mysqli_query($connection, " SELECT ticketNo FROM ticket WHERE employee = '$employee' AND status = 'saved' GROUP BY ticketNo ORDER BY id ASC ") or die("Query fail: " . mysqli_error()); 
 			while($row = mysqli_fetch_array($result))
 			{
-				$this->getSavedTicket_id[] = $row['id'];
+				$this->getSavedTicket_ticketNo[] = $row['ticketNo'];
 			}	
 		}
 
@@ -107,10 +107,10 @@
 
 		public function getLastTicketNo() {
 			$connection = mysqli_connect($this->host,$this->username,$this->password,$this->database);      
-			$result = mysqli_query($connection, " SELECT ticketNo FROM ticket GROUP BY ticketNo ORDER BY ticketNo DESC LIMIT 1 ") or die("Query fail: " . mysqli_error()); 
+			$result = mysqli_query($connection, " SELECT ticketNoCounter FROM ticket GROUP BY ticketNoCounter ORDER BY ticketNoCounter DESC LIMIT 1 ") or die("Query fail: " . mysqli_error()); 
 			while($row = mysqli_fetch_array($result))
 			{
-				return $row['ticketNo'];
+				return $row['ticketNoCounter'];
 			}				
 		}
 

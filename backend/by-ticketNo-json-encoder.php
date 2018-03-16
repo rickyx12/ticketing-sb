@@ -22,6 +22,7 @@
 			$data[$id]['start'] = $db->selectNow('ticket','start','id',$id);
 			$data[$id]['end'] = $db->selectNow('ticket','end','id',$id);
 			$data[$id]['remarks'] = $db->selectNow('ticket','remarks','id',$id);
+			$data[$id]['ticketNo'] = $db->selectNow('ticket','ticketNo','id',$id);
 		}
 		echo json_encode($data);
 	}else { 

@@ -12,6 +12,7 @@
 		$ticket->getPublishedTicketUser($_SESSION['userId']);
 		
 
+	if($ticket->getPublishedTicketUser_ticketNo() != "") {
 		foreach($ticket->getPublishedTicketUser_ticketNo() as $ticketNo) {
 			//$data['ticketNo'] = $ticketNo;
 			//$data['date'] = $db->formatDate($db->selectNow('ticket','datePublished','ticketNo',$ticketNo));
@@ -23,6 +24,13 @@
 			"iTotalDisplayRecords" => count($data),
 			"aaData" => $data
 		);
+	}else {
+		$results = array(
+			"iTotalRecords" => 0,
+			"iTotalDisplayRecords" => 0,
+			"aaData" => array()
+		);
+	}
 
 		echo json_encode($results);
 

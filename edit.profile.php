@@ -275,11 +275,12 @@
                 <form method="post" action="backend/upload-photo.php" enctype="multipart/form-data">
 
                   <?php if($db->selectNow('user','photo_path','id',$_SESSION['userId']) != ""): ?>
-                    <img id="user-photo" src="user_photos/<?= $db->selectNow('user','photo_path','id',$_SESSION['userId']) ?>" class="avatar">
+                    <img id="user-photo" src="user_photos/<?= $db->selectNow('user','photo_path','id',$_SESSION['userId']) ?>" class="avatar-preview">
                   <?php else: ?>
-                    <img id="user-photo" src="img/avatar.png" class="avatar">
+                    <img id="user-photo" src="img/avatar.png" class="avatar-preview">
                   <?php endif; ?>
                   <input type="submit" id="upload-photo" class="btn btn-default btn-sm" value="Update">
+                  <br>
                   <br>
                   <input type="file" name="fileToUpload" class="btn btn-default btn-sm" style="margin-top: 2%; margin-left: -3%;" onchange="readURL(this);">
                 </form>
@@ -337,7 +338,7 @@
             <div class="form-row">
               <div class="col-md-6">
                 <label for="exampleInputPassword1">New Password</label>
-                <input class="form-control" id="new-password" type="password"> <span id="new-password-limiter" style="color:red; font-size:15px;">Minimum of 6 character</span>
+                <input class="form-control" id="new-password" type="password"> <span id="new-password-limiter" style="color:red; font-size:15px;">Minimum of 6 character</span><br><span id="alphanumeric-checker" style="color:red; font-size:15px;">Password should be Alphanumeric</span>
               </div>            
             </div>
           </div>
