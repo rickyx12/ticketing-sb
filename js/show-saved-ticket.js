@@ -24,7 +24,7 @@ function getSavedTicket(json) {
 				 			viewModal += "</div>";
 				 			viewModal += "<div class='modal-body'>";
 				 				viewModal += "<div class='col-md-12 text-center'>";
-				 					viewModal += "<table class='table table-hover'><thead><tr><th>No.</th><th>Subject</th><th>Code/Title</th><th>Activity</th><th>Start Time</th><th>End Time</th><th>Remarks</th></tr></thead><tbody id='saved-view-table"+field.ticketNo+"'></tbody></table>";
+				 					viewModal += "<table class='table table-hover'><thead><tr><th>No.</th><th>Subject</th><th>Code/Title</th><th>Activity</th><th>Start Time</th><th>End Time</th><th>Remarks</th><th>Action</th></tr></thead><tbody id='saved-view-table"+field.ticketNo+"'></tbody></table>";
 				 				viewModal += "</div>"
 				 				viewModal += "<div class='col-md-12 text-right'>";
 				 					viewModal += "<button data-dismiss='modal' class='btn btn-danger'>Close</button>";
@@ -157,7 +157,7 @@ function viewSavedTicket(json) {
 	$.getJSON(json,'',function(result) {
 		var tableData = '';
 		var ticketNo = '';
-		
+		var taskModal = '';
 
 		if(result != "null") {
 			$.each(result,function(i,field) {	
@@ -169,9 +169,62 @@ function viewSavedTicket(json) {
 				 tableData += '<td>'+field.start+'</td>';
 				 tableData += '<td>'+field.end+'</td>';
 				 tableData += '<td>'+field.remarks+'</td>';
+				 tableData += '<td><button id="saved-task-btn'+field.id+'" data-toggle="modal" data-target="#task-information'+field.id+'" data-dismiss="modal" class="btn btn-default">Update</button></td>';
 				 tableData += '</tr>';
-				 ticketNo = field.ticketNo;
+				
+				taskModal += "<div id='task-information"+field.id+"' class='modal fade' role='dialog' style='overflow-y:auto;'>";
+					taskModal += "<div class='modal-dialog'>";
+						taskModal += "<div class='modal-content'>"; 
+							taskModal += "<div class='modal-body'>";
+								taskModal += "<div class='col-md-12'>";
+									taskModal += "<div class=form-group>";
+										taskModal += "<label>Subject</label>";
+										taskModal += "<input type='text' id='saved-task-subject"+field.id+"' class='form-control' value='"+field.subject+"'>";
+									taskModal += "</div>";
+									taskModal += "<div class='form-group'>";
+										taskModal += "<label>Code/Title</label>";
+										taskModal += "<input type='text' id='saved-task-title"+field.id+"' class='form-control' value='"+field.title+"'>";
+									taskModal += "</div>";
+									taskModal += "<div class='form-group'>";
+										taskModal += "<label>Activity</label>";
+										taskModal += "<textarea id='saved-task-activity"+field.id+"' class='form-control' rows='4'>"+field.activity+"</textarea>";
+									taskModal += "</div>";
+									taskModal += "<div class='form-group'>";
+										taskModal += "<label>Start time</label>";
+										taskModal += "<input type='text' id='saved-task-startTime"+field.id+"' class='form-control' value='"+field.start+"'>";
+									taskModal += "</div>";
+									taskModal += "<div class='form-group'>";
+										taskModal += "<label>End time</label>";
+										taskModal += "<input type='text' id='saved-task-endTime"+field.id+"' class='form-control' value='"+field.end+"'>";
+									taskModal += "</div>";
+									taskModal += "<div class='form-group'>";
+										taskModal += "<label>Remarks</label>";
+										taskModal += "<input type='text' id='saved-task-remarks"+field.id+"' class='form-control' value='"+field.remarks+"'>";
+									taskModal += "</div>";
+								taskModal += "</div>";
+								taskModal += "<div class='col-md-12 text-right'>";
+									taskModal += "<button class='btn btn-default' data-dismiss='modal'>Cancel</button>";
+									taskModal += "  <button id='saved-task-update-btn"+field.id+"' class='btn btn-success' data-dismiss='modal'>Update</button>";
+								taskModal += "</div>";
+							taskModal += "</div>";
+						taskModal += "</div>";
+					taskModal += "</div>";
+				taskModal += "</div>";
+	
+			$('#task-information-handler').append(taskModal);
+
+			$('#saved-task-startTime'+field.id).datetimepicker({
+				format:'LT'
 			});
+
+			$('#saved-task-endTime'+field.id).datetimepicker({
+				format:'LT'
+			});			
+
+			ticketNo = field.ticketNo;	
+
+			});
+
 		}else {
 			tableData += '<tr></tr>';
 		}

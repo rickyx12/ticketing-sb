@@ -3,47 +3,6 @@ function savedTicketBtn() {
 
 			$.each(result,function(i,field) {
 
-				//  $('#delete-saved-ticket-btn'+field.id).click(function(){
-				// 	$.ajax({
-				// 		url:'./backend/delete-ticket.php',
-				// 		type:'POST',
-				// 		data:{id:field.id},
-				// 		success:function(){
-				// 		    $('.modal-backdrop').remove();
-				// 			getSavedTicket('./backend/saved-ticket-json-encoder.php');
-				// 		}
-				// 	});
-				//  });
-
-				// $('#edit-saved-ticket-btn'+field.id).click(function(){
-				// 	var editSubject = $('#edit-subject'+field.id).val();
-				// 	var editTitle = $('#edit-title'+field.id).val();
-				// 	var editActivity = $('#edit-activity'+field.id).val();
-				// 	var editStart = $('#edit-start'+field.id).val();
-				// 	var editEnd = $('#edit-end'+field.id).val();
-				// 	var editRemarks = $('#edit-remarks'+field.id).val();
-
-				// 	var data = {
-				// 		id:field.id,
-				// 		subject:editSubject,
-				// 		title:editTitle,
-				// 		activity:editActivity,
-				// 		start:editStart,
-				// 		end:editEnd,
-				// 		remarks:editRemarks
-				// 	};
-					
-				// 	$.ajax({
-				// 		url:'./backend/edit-ticket.php',
-				// 		type:'POST',
-				// 		data:data,
-				// 		success:function(){
-				// 			getSavedTicket('./backend/saved-ticket-json-encoder.php');
-				// 			savedTicketBtn();
-				// 		}
-				// 	});
-
-				// });
 
 				$(document).on('click','#saved-publish-btn'+field.ticketNo,function(){
 					var datePublished = $('#save-publish-date'+field.ticketNo).val();
@@ -66,27 +25,6 @@ function savedTicketBtn() {
 					console.log();
 				});
 
-				// $('#saved-publish-btn'+field.ticketNo).click(function(){
-
-				// 	var datePublished = $('#save-publish-date'+field.ticketNo).val();
-
-				// 	var data = {
-				// 		ticketNo: field.ticketNo,
-				// 		datePublished: datePublished
-				// 	};
-
-				// 	$.ajax({
-				// 		url:'./backend/publish-saved.php',
-				// 		type:'POST',
-				// 		data:data,
-				// 		success:function(){
-				// 			getSavedTicket('./backend/saved-ticket-json-encoder.php');
-				// 			savedTicketBtn();
-				// 		}
-				// 	});
-
-				// 	console.log();
-				// });
 
 				$('#edit-start'+field.id).datetimepicker({
 					format:'LT'
@@ -96,6 +34,46 @@ function savedTicketBtn() {
 					format:'LT'
 				});
 
+				viewSavedTicketBtn('./backend/by-ticketNo-json-encoder.php?ticketNo='+field.ticketNo);
+			});
+	});
+}
+
+
+function viewSavedTicketBtn(json) {
+	$.getJSON(json,'',function(result) {	
+
+			$.each(result,function(i,field) {
+				$(document).on('click','#saved-task-update-btn'+field.id,function(){
+					
+					var subject = $('#saved-task-subject'+field.id).val();
+					var title = $('#saved-task-title'+field.id).val();
+					var activity = $('#saved-task-activity'+field.id).val();
+					var startTime = $('#saved-task-startTime'+field.id).val();
+					var endTime = $('#saved-task-endTime'+field.id).val();
+					var remarks = $('#saved-task-remarks'+field.id).val();
+
+					var data = {
+						id:field.id,
+						subject:subject,
+						title:title,
+						activity:activity,
+						startTime:startTime,
+						endTime:endTime,
+						remarks:remarks
+					};
+
+					$.ajax({
+						url:'./backend/saved-task-update.php',
+						type:'POST',
+						data:data,
+						success:function(){
+							getSavedTicket('./backend/saved-ticket-json-encoder.php');
+							savedTicketBtn();
+						}
+					});
+
+				});
 			});
 	});
 }
@@ -103,6 +81,5 @@ function savedTicketBtn() {
 
 $(function(){
 	getSavedTicket('./backend/saved-ticket-json-encoder.php');
-	//viewSavedTicket('./backend/by-ticketNo-json-encoder.php?ticketNo=DTU-20180314-14');
 	savedTicketBtn();
 });
