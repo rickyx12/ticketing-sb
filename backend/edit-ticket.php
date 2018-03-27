@@ -16,8 +16,8 @@
 	$db->editNow("ticket","id",$id,"subject",$subject);
 	$db->editNow("ticket","id",$id,"title",$title);
 	$db->editNow("ticket","id",$id,"activity",$activity);
-	$db->editNow("ticket","id",$id,"start",$db->format24hr($start));
-	$db->editNow("ticket","id",$id,"end",$db->format24hr($end));
+	$db->editNow("ticket","id",$id,"start",$db->($start));
+	$db->editNow("ticket","id",$id,"end",$db->($end));
 	$db->editNow("ticket","id",$id,"remarks",$remarks);
 
 ?>

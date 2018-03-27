@@ -8,7 +8,7 @@ function getTicket(json) {
 		if(result != "null") {
 			$.each(result,function(i,field) {	
 				 tableData += '<tr>';
-				 tableData += '<td>'+field.id+'</td>';
+				 // tableData += '<td>'+field.id+'</td>';
 				 tableData += '<td>'+field.subject+'</td>';
 				 tableData += '<td>'+field.code+'</td>';
 				 tableData += '<td>'+field.activity+'</td>';

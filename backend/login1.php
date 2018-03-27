@@ -14,7 +14,7 @@
 		if($db->selectNow("user",'id',"employeeId",$userId) != "" && $db->selectNow("user","id","password",$db->encrypt_decrypt($password)) != "") {
 			$_SESSION['userId'] = $db->selectNow('user','id','employeeId',$userId);			
 			if($db->selectNow('user','role','employeeId',$userId) == "user") {
-				header("Location: ../index.php");
+				header("Location: ../table-kite.php");
 			}else {
 				header("Location: admin-panel.php");
 			}

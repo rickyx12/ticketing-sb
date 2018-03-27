@@ -2,6 +2,15 @@ $(function(){
 
 
 	$('#alphanumeric-checker').hide();
+	$('#required-userId').hide();
+	$('#required-firstName').hide();
+	$('#required-lastName').hide();
+	$('#required-middleName').hide();
+	$('#required-division').hide();
+	$('#required-department').hide();
+	$('#required-section').hide();
+	$('#required-branch').hide();
+	$('#required-position').hide();
 
 	$('#register-profile-btn').click(function(){
 		
@@ -17,26 +26,39 @@ $(function(){
 		var employmentStatus = $('#employment-status').val();
 		var employeePosition = $('#employee-position').val();
 
+		if(userId !== "" && employeeFirstName !== "" && employeeLastName != "" && employeeMiddleName != "" && employeePassword != "" && employeeDivision != "" && employeeDepartment != "" && employeeSection != "" && employeeBranch != "" && employmentStatus != "" && employeePosition != "") {
 
-		var data = {
-			userId:userId,
-			employeeFirstName:employeeFirstName,
-			employeeLastName:employeeLastName,
-			employeeMiddleName:employeeMiddleName,
-			employeePassword:employeePassword,
-			employeeDivision:employeeDivision,
-			employeeDepartment:employeeDepartment,
-			employeeSection:employeeSection,
-			employeeBranch:employeeBranch,
-			employmentStatus:employmentStatus,
-			employeePosition:employeePosition
-		};
+			var data = {
+				userId:userId,
+				employeeFirstName:employeeFirstName,
+				employeeLastName:employeeLastName,
+				employeeMiddleName:employeeMiddleName,
+				employeePassword:employeePassword,
+				employeeDivision:employeeDivision,
+				employeeDepartment:employeeDepartment,
+				employeeSection:employeeSection,
+				employeeBranch:employeeBranch,
+				employmentStatus:employmentStatus,
+				employeePosition:employeePosition
+			};
 
-		$.ajax({
-			url:'./backend/register-account.php',
-			type:'POST',
-			data:data
-		});		
+
+			$.ajax({
+				url:'./backend/register-account.php',
+				type:'POST',
+				data:data,
+				success:function(){
+					window.location.replace("./login.php");
+				}
+			});		
+
+		}else {
+
+			if(userId == "") {
+				$('#required-userId').show();
+			}
+
+		}
 
 	});
 

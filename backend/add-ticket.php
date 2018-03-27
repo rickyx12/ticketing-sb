@@ -14,8 +14,8 @@
 	$data = array(
 		"subject" => $subject,
 		"title" => $title,
-		"start" => $db->format24hr($start),
-		"end" => $db->format24hr($end),
+		"start" => $start,
+		"end" => $end,
 		"activity" => $activity,
 		"remarks" => $remarks,
 		"employee" => $_SESSION['userId']

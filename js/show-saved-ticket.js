@@ -24,7 +24,7 @@ function getSavedTicket(json) {
 				 			viewModal += "</div>";
 				 			viewModal += "<div class='modal-body'>";
 				 				viewModal += "<div class='col-md-12 text-center'>";
-				 					viewModal += "<table class='table table-hover'><thead><tr><th>No.</th><th>Subject</th><th>Code/Title</th><th>Activity</th><th>Start Time</th><th>End Time</th><th>Remarks</th><th>Action</th></tr></thead><tbody id='saved-view-table"+field.ticketNo+"'></tbody></table>";
+				 					viewModal += "<table class='table table-hover'><thead><tr><th>Subject</th><th>Code/Title</th><th>Activity</th><th>Start Time</th><th>End Time</th><th>Remarks</th><th>Action</th></tr></thead><tbody id='saved-view-table"+field.ticketNo+"'></tbody></table>";
 				 				viewModal += "</div>"
 				 				viewModal += "<div class='col-md-12 text-right'>";
 				 					viewModal += "<button data-dismiss='modal' class='btn btn-danger'>Close</button>";
@@ -162,7 +162,6 @@ function viewSavedTicket(json) {
 		if(result != "null") {
 			$.each(result,function(i,field) {	
 				 tableData += '<tr>';
-				 tableData += '<td>'+field.id+'</td>';
 				 tableData += '<td>'+field.subject+'</td>';
 				 tableData += '<td>'+field.title+'</td>';
 				 tableData += '<td>'+field.activity+'</td>';
