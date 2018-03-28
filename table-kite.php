@@ -263,15 +263,15 @@
 	      <div class="card mb-3">
 	        <div class="card-header">
 	          <div class="col-sm-12">
-	            <i class="fa fa-table"></i> Ticket#: DTU-<?= date("Ymd") ?>-<?= $ticket->getLastTicketNo() + 1 ?>
+	            <i class="fa fa-table"></i> Ticket#: DTU-<?= date("Ymd") ?>-<?= $db->selectNow('ticketCounter','ticketCount','employeeId',$_SESSION['userId']) ?>
 	            <span class="pull-right"><?= date("F d, Y") ?></span>
 	          </div>
 	        </div>
 		        <div class="card-body">
 		          <div class="row">
 		            <div class="col-md-6">
-		              Current Ticket: DTU-<?= date("Ymd") ?>-<?= $ticket->getLastTicketNo() + 1 ?>
-                  <input type="hidden" id="ticketNo" value="DTU-<?= date("Ymd") ?>-<?= $ticket->getLastTicketNo() + 1 ?>">
+		              Current Ticket: DTU-<?= date("Ymd") ?>-<?= $db->selectNow('ticketCounter','ticketCount','employeeId',$_SESSION['userId']) ?>
+                  <input type="hidden" id="ticketNo" value="DTU-<?= date("Ymd") ?>-<?= $db->selectNow('ticketCounter','ticketCount','employeeId',$_SESSION['userId']) ?>">
 		            </div>
 		            <div class="col-md-6 text-right">
 		              <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add-ticket-modal">Add Item</button>

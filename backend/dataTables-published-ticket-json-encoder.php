@@ -11,13 +11,14 @@
 
 		$ticket->getPublishedTicketUser($_SESSION['userId']);
 		
+	if($ticket->getPublishedTicketUser_id() != "") {
+		foreach($ticket->getPublishedTicketUser_id() as $id) {
 
-	if($ticket->getPublishedTicketUser_ticketNo() != "") {
-		foreach($ticket->getPublishedTicketUser_ticketNo() as $ticketNo) {
-			//$data['ticketNo'] = $ticketNo;
-			//$data['date'] = $db->formatDate($db->selectNow('ticket','datePublished','ticketNo',$ticketNo));
-			array_push($data,array("ticketNo" => $ticketNo, "date" => $db->formatDate($db->selectNow('ticket','datePublished','ticketNo',$ticketNo)),"title" => $db->selectNow('ticket','title','ticketNo',$ticketNo)));
+			$ticketNo = $db->selectNow('ticket','ticketNo','id',$id);
+
+			 array_push($data,array("id" => $id, "ticketNo" => $ticketNo, "date" => $db->formatDate($db->selectNow('ticket','datePublished','id',$id)),"title" => $db->selectNow('ticket','title','id',$id)));
 		}
+
 
 		$results = array(
 			"iTotalRecords" => count($data),

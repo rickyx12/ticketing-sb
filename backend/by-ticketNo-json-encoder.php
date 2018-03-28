@@ -4,14 +4,14 @@
 	require '../class/Ticket.php';
 
 	$ticketNo = $_GET['ticketNo'];
+	//$datePublished = $_GET['datePublished'];
 
 	$db = new database();
 	$ticket = new Ticket();
 
 	$data = array();
 
-
-	$ticket->getTicketByTicketNo($ticketNo);
+	$ticket->getTicketByTicketNo($ticketNo,"");
 
 	if(!empty($ticket->getTicketByTicketNo_id()) > 0) {
 		foreach($ticket->getTicketByTicketNo_id() as $id) {

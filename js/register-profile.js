@@ -26,7 +26,7 @@ $(function(){
 		var employmentStatus = $('#employment-status').val();
 		var employeePosition = $('#employee-position').val();
 
-		if(userId !== "" && employeeFirstName !== "" && employeeLastName != "" && employeeMiddleName != "" && employeePassword != "" && employeeDivision != "" && employeeDepartment != "" && employeeSection != "" && employeeBranch != "" && employmentStatus != "" && employeePosition != "") {
+		if(userId !== "" && employeeFirstName !== "" && employeeLastName !== "" && employeeMiddleName !== "" && employeePassword !== "" && employeeDivision !== "" && employeeDepartment !== "" && employeeSection !== "" && employeeBranch !== "" && employmentStatus !== "" && employeePosition !== "") {
 
 			var data = {
 				userId:userId,
@@ -56,6 +56,56 @@ $(function(){
 
 			if(userId == "") {
 				$('#required-userId').show();
+			}else {
+				$('#required-userId').hide();
+			}
+
+			if(employeeFirstName == "") {
+				$('#required-firstName').show();
+			}else {
+				$('#required-firstName').hide();
+			}
+
+			if(employeeLastName == "") {
+				$('#required-lastName').show();
+			}else {
+				$('#required-lastName').hide();
+			}
+
+			if(employeeMiddleName == ""){ 
+				$('#required-middleName').show();
+			}else {
+				$('#required-middleName').hide();
+			}
+
+			if(employeeDivision == "") {
+				$('#required-division').show();
+			}else {
+				$('#required-division').hide();
+			}
+
+			if(employeeDepartment == "") {
+				$('#required-department').show();
+			}else {
+				$('#required-department').hide();
+			}
+
+			if(employeeSection == "") {
+				$('#required-section').show();
+			}else {
+				$('#required-section').hide();
+			}
+
+			if(employeeBranch == "") {
+				$('#required-branch').show();
+			}else {
+				$('#required-branch').hide();
+			}
+
+			if(employeePosition == "") { 
+				$('#required-position').show();
+			}else {
+				$('#required-position').hide();
 			}
 
 		}

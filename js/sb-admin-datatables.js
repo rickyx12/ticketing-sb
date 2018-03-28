@@ -13,13 +13,14 @@ $(document).ready(function() {
 		{mData:'ticketNo'},
 		{mData:'date'},
 		{mData:'title'},
-		{mData:'ticketNo'}
+		{mData:'id'}
   	],
     "columnDefs": [ {
         "targets": -1,
         //"defaultContent": "<a href='./ticket-form.php?ticketNo='><button class='btn btn-default btn-sm'>View</button></a> <button class='btn btn-default btn-sm'>Download</button> <button class='btn btn-default btn-sm'>Print</button>"
         "render": function ( data, type, row, meta ) {
-      		return '<a href="./ticket-form.php?ticketNo='+data+'" target="_blank"><button class="btn btn-default btn-sm">View</button></a> <button id="history-download-btn'+data+'" class="btn btn-default btn-sm">Download</button> <button id="history-print-btn'+data+'" class="btn btn-default btn-sm">Print</button>';
+          console.log(data);
+      		return '<a href="./ticket-form.php?id='+data+'" target="_blank"><button class="btn btn-default btn-sm">View</button></a> <button id="history-download-btn'+data+'" class="btn btn-default btn-sm">Download</button> <button id="history-print-btn'+data+'" class="btn btn-default btn-sm">Print</button>';
     	}	
     },
  	{ 

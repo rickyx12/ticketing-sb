@@ -8,6 +8,7 @@ function savedTicketBtn() {
 					var datePublished = $('#save-publish-date'+field.ticketNo).val();
 
 					var data = {
+						id:field.id,
 						ticketNo: field.ticketNo,
 						datePublished: datePublished
 					};
@@ -34,7 +35,7 @@ function savedTicketBtn() {
 					format:'LT'
 				});
 
-				viewSavedTicketBtn('./backend/by-ticketNo-json-encoder.php?ticketNo='+field.ticketNo);
+				viewSavedTicketBtn('./backend/by-ticketNo-json-encoder.php?ticketNo='+field.ticketNo+"&datePublished="+field.datePublished);
 			});
 	});
 }

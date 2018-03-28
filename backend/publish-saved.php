@@ -4,6 +4,7 @@
 	require '../class/database.php';
 	require '../class/Ticket.php';
 
+	$id = $_POST['id'];
 	$ticketNo = $_POST['ticketNo'];
 	$datePublished = $_POST['datePublished'];
 
@@ -11,7 +12,7 @@
 	$ticket = new Ticket();
 
 
-	$ticket->getTicketByTicketNo($ticketNo);
+	$ticket->getTicketByTicketNo($ticketNo,$datePublished);
 
 
 	foreach($ticket->getTicketByTicketNo_id() as $id) {

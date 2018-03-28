@@ -3,10 +3,16 @@
 	require 'class/database.php';
 	require 'class/Ticket.php';
 
+	$id = $_GET['id'];
+
 	$db = new database();
 	$ticket = new Ticket();
 
-	$ticket->getTicketByTicketNo($_GET['ticketNo']);
+
+	$ticketNo = $db->selectNow('ticket','ticketNo','id',$id);
+	$datePublished = $db->selectNow('ticket','datePublished','id',$id);
+
+	$ticket->getTicketByTicketNo($ticketNo,$datePublished);
 
 ?>
 <html>
@@ -32,7 +38,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-12 text-right">
-						<h6 style="margin-right: 20%;">Ticket#: <?= $_GET['ticketNo'] ?></h6>
+						<h6 style="margin-right: 20%;">Ticket#: <?= $ticketNo ?></h6>
 					</div>
 				</div>
 				<div class="row">
@@ -46,15 +52,15 @@
 					<div class="col-xs-12">
 						<div class="col-xs-6">
 							<label>NAME:</label>
-							<input type='text' id='name-field' value='<?= $db->selectNow("user","name","id",$db->selectNow("ticket",'employee','ticketNo',$_GET["ticketNo"])) ?>'>
+							<input type='text' id='name-field' value='<?= $db->selectNow("user","name","id",$db->selectNow("ticket",'employee','id',$id)) ?>'>
 						</div>
 						<div class="col-xs-3">
 								<label>SECTION:</label>
-								<input type="text" class="other-field" value="<?= $db->selectNow("user","section","id",$db->selectNow("ticket",'employee','ticketNo',$_GET["ticketNo"])) ?>">
+								<input type="text" class="other-field" value="<?= $db->selectNow("user","section","id",$db->selectNow("ticket",'employee','id',$id)) ?>">
 						</div>
 						<div class="col-xs-3">
 								<label>DATE:</label>
-								<input type="text" class="other-field" value="<?= $db->selectNow('ticket','dateFormatted','ticketNo',$_GET['ticketNo']) ?>">
+								<input type="text" class="other-field" value="<?= $db->selectNow('ticket','dateFormatted','id',$id) ?>">
 						</div>					
 						<table class="table table-bordered">
 							<thead>
