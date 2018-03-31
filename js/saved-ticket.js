@@ -5,10 +5,10 @@ function savedTicketBtn() {
 
 
 				$(document).on('click','#saved-publish-btn'+field.ticketNo,function(){
+
 					var datePublished = $('#save-publish-date'+field.ticketNo).val();
 
 					var data = {
-						id:field.id,
 						ticketNo: field.ticketNo,
 						datePublished: datePublished
 					};
@@ -23,7 +23,7 @@ function savedTicketBtn() {
 						}
 					});
 
-					console.log();
+					console.log(data);
 				});
 
 

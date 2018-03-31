@@ -1,6 +1,14 @@
 function ticketBtn() {
 	$.getJSON('./backend/ticket-json-encoder.php','',function(result) {	
 
+			if(result == '' || result == null) {
+				$('#save-btn').prop('disabled',true);
+				$('#publish-btn').prop('disabled',true);
+			}else {
+				$('#save-btn').prop('disabled',false);
+				$('#publish-btn').prop('disabled',false);
+			}
+
 			$.each(result,function(i,field) {
 
 				 $('#delete-ticket-btn'+field.id).click(function(){
@@ -11,6 +19,7 @@ function ticketBtn() {
 						success:function(){
 						    $('.modal-backdrop').remove();
 							getTicket('./backend/ticket-json-encoder.php');
+							ticketBtn();
 						}
 					});
 				 });
@@ -69,7 +78,7 @@ $(function(){
 	getTicket('./backend/ticket-json-encoder.php');
 	ticketBtn();
 	getPublishedTicket('./backend/published-ticket-json-encoder.php');
-	
+
 	$('#add-ticket-btn').click(function(){
 
 		var subject = $('#subject').val();
@@ -138,17 +147,15 @@ $(function(){
 	$('#save-ticket-btn').click(function(){
 
 		var chkArray = [];
-		
+
 		$(".publish:checked").each(function() {
 			chkArray.push($(this).val());
 		});
 		
-		console.log(chkArray);
 		
 		var selected;
-		selected = chkArray.join(',') ;
-
-		var ticketNo = $('#ticketNo').val();
+		selected = chkArray.join(',');
+		var ticketNo = $('#saved-ticket-no').val();
 
 		$.ajax({
 			url:'./backend/save.php',

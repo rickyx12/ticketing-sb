@@ -273,7 +273,6 @@
                 <tr>
                   <th>Ticket No</th>
                   <th>Date</th>
-                  <th>Code/Title</th>
                   <th>Actions</th>
                 </tr>
               </thead>

@@ -3,7 +3,6 @@ function getTicket(json) {
 		var tableData = '';
 		var deleteModal = '';
 		var editModal = '';
-		console.log(result);
 
 		if(result != "null") {
 			$.each(result,function(i,field) {	
@@ -81,21 +80,6 @@ function getTicket(json) {
 				 		editModal += "</div>";
 				 	editModal += "</div>";
 				 editModal += "</div>";
-
-				 // $(document).on('click','#delete-ticket-btn'+field.id,function(){
-					// $.ajax({
-					// 	url:'./backend/delete-ticket.php',
-					// 	type:'POST',
-					// 	data:{id:field.id},
-					// 	success:function(){
-					// 		getTicket('./backend/ticket-json-encoder.php');
-					// 	}
-					// });
-				 // });
-
-
-
-
 			});
 		}else {
 			tableData += '<tr></tr>';

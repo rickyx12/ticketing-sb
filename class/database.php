@@ -91,6 +91,7 @@ public function __construct() {
 
 
 	public function doubleEditNow($table,$identifier,$identifierData,$identifier1,$identifierData1,$columns,$newData) {
+
 		$con = ($GLOBALS["___mysqli_ston"] = mysqli_connect($this->host, $this->username, $this->password));
 		if (!$con)
 		  {
@@ -98,7 +99,7 @@ public function __construct() {
 		  }
 		((bool)mysqli_query( $con, "USE " . $this->database));
 		mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE $table SET $columns = '$newData'
-		WHERE $identifier = '$identifierData' AND '$identifier1' = '$identifierData1' ");
+		WHERE $identifier = '$identifierData' AND $identifier1 = '$identifierData1' ");
 		((is_null($___mysqli_res = mysqli_close($con))) ? false : $___mysqli_res);
 	}
 

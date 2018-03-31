@@ -263,15 +263,15 @@
 	      <div class="card mb-3">
 	        <div class="card-header">
 	          <div class="col-sm-12">
-	            <i class="fa fa-table"></i> Ticket#: DTU-<?= date("Ymd") ?>-<?= $db->selectNow('ticketCounter','ticketCount','employeeId',$_SESSION['userId']) ?>
+	            <i class="fa fa-table"></i> Ticket#: <?= date("Ymd") ?>-<?= $db->selectNow('ticketCounter','ticketCount','employeeId',$_SESSION['userId']) ?>
 	            <span class="pull-right"><?= date("F d, Y") ?></span>
 	          </div>
 	        </div>
 		        <div class="card-body">
 		          <div class="row">
 		            <div class="col-md-6">
-		              Current Ticket: DTU-<?= date("Ymd") ?>-<?= $db->selectNow('ticketCounter','ticketCount','employeeId',$_SESSION['userId']) ?>
-                  <input type="hidden" id="ticketNo" value="DTU-<?= date("Ymd") ?>-<?= $db->selectNow('ticketCounter','ticketCount','employeeId',$_SESSION['userId']) ?>">
+		              Current Ticket: <?= date("Ymd") ?>-<?= $db->selectNow('ticketCounter','ticketCount','employeeId',$_SESSION['userId']) ?>
+                  <input type="hidden" id="ticketNo" value="<?= date("Ymd") ?>-<?= $db->selectNow('ticketCounter','ticketCount','employeeId',$_SESSION['userId']) ?>">
 		            </div>
 		            <div class="col-md-6 text-right">
 		              <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add-ticket-modal">Add Item</button>
@@ -294,8 +294,8 @@
 			              <tbody id="ticket-table"></tbody>
 			            </table>
 			            <div class="col-md-12 text-right">
-			              <button class="btn btn-success" data-toggle="modal" data-target="#save-ticket-modal"><i class="fa fa-save"></i> Save</button>
-			              <button class="btn btn-info" data-toggle="modal" data-target="#publish-ticket-modal"><i class="fa fa-check"></i> Publish</button>
+			              <button id="save-btn" class="btn btn-success" data-toggle="modal" data-target="#save-ticket-modal"><i class="fa fa-save"></i> Save</button>
+			              <button id="publish-btn" class="btn btn-info" data-toggle="modal" data-target="#publish-ticket-modal"><i class="fa fa-check"></i> Publish</button>
 			            </div>
 			          </div>
 		        </div>
@@ -400,9 +400,10 @@
          </div>
           <div class="modal-body">
             <div class="col-md-12 text-center">
-              Are you sure you want to saved this ticket?
+              <!-- Are you sure you want to saved this ticket? -->
+              <label class="pull-left">New Ticket No:</label>
+              <input type="text" id="saved-ticket-no" class="form-control" value="<?= date("Ymd") ?>-<?= $db->selectNow('ticketCounter','ticketCount','employeeId',$_SESSION['userId']) ?>-<?= $ticket->getSaveNo($_SESSION['userId']) ?>">
             </div>
-            <br>
             <br>
             <div class="col-md-12 text-right">
               <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> 
