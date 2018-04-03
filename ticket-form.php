@@ -46,15 +46,15 @@
 				<br>
 				<div class="row">
 					<div class="col-xs-12">
-						<div class="col-xs-6">
+						<div class="col-xs-4">
 							<label>NAME:</label>
 							<input type='text' id='name-field' value='<?= $db->selectNow("user","name","id",$db->selectNow("ticket",'employee','ticketNo',$ticketNo)) ?>'>
 						</div>
-						<div class="col-xs-3">
+						<div class="col-xs-4">
 								<label>SECTION:</label>
 								<input type="text" class="other-field" value="<?= $db->selectNow("user","section","id",$db->selectNow("ticket",'employee','ticketNo',$ticketNo)) ?>">
 						</div>
-						<div class="col-xs-3">
+						<div class="col-xs-4">
 								<label>DATE:</label>
 								<input type="text" class="other-field" value="<?= $db->selectNow('ticket','dateFormatted','ticketNo',$ticketNo) ?>">
 						</div>					
