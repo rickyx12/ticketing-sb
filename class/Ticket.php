@@ -125,7 +125,7 @@
 
 		public function getSaveNo($userId) {
 			$connection = mysqli_connect($this->host,$this->username,$this->password,$this->database);      
-			$result = mysqli_query($connection, " SELECT COUNT(id) as no FROM ticket WHERE employee = '$userId' AND status IN ('saved') ") or die("Query fail: " . mysqli_error()); 
+			$result = mysqli_query($connection, " SELECT COUNT(id) as no FROM ticket WHERE employee = '$userId' AND dateSaved != '' ") or die("Query fail: " . mysqli_error()); 
 			while($row = mysqli_fetch_array($result))
 			{
 				return $row['no'] + 1;	
