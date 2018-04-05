@@ -31,8 +31,13 @@
 				</div>
 				<div class="row">
 					<div class="col-md-12 text-center">
-						<img src="kite.png" width="150" height="60" style="margin-right: 5%;">
-						<span style="margin-right: 25%;">DAILY PRODUCTION WORK TICKET</span>
+						<img src="../img/kite.png" width="150" height="60" style="margin-right: 5%;">
+						<span style="margin-right: 15%;">DAILY PRODUCTION WORK TICKET</span>
+						<?php if($db->selectNow('user','photo_path','id',$_SESSION['userId']) != ""): ?>
+							<img src="../user_photos/<?= $db->selectNow('user','photo_path','id',$_SESSION['userId']) ?>" height="70px" width="70px">
+						<?php else: ?>
+							<img src="../avatar.png" height="70px" width="70px">
+						<?php endif; ?>
 					</div>
 				</div>
 				<br>
