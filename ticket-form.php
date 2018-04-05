@@ -7,8 +7,8 @@
 
 	$db = new database();
 	$ticket = new Ticket();
-
-	$ticket->getTicketByTicketNo($ticketNo);
+	$sanitizeTicketNo = htmlspecialchars($ticketNo, ENT_QUOTES, 'utf-8');
+	$ticket->getTicketByTicketNo($sanitizeTicketNo);
 
 ?>
 <html>
@@ -40,7 +40,12 @@
 				<div class="row">
 					<div class="col-md-12 text-center">
 						<img src="img/kite.png" width="150" height="60" style="margin-right: 5%;">
-						<span style="margin-right: 25%;">DAILY PRODUCTION WORK TICKET</span>
+						<span style="margin-right: 15%;">DAILY PRODUCTION WORK TICKET</span>
+						<?php if($db->selectNow('user','photo_path','id',$_SESSION['userId']) != ""): ?>
+							<img src="user_photos/<?= $db->selectNow('user','photo_path','id',$_SESSION['userId']) ?>" height="70px" width="70px">
+						<?php else: ?>
+							<img src="avatar.png" height="70px" width="70px">
+						<?php endif; ?>
 					</div>
 				</div>
 				<br>
@@ -57,43 +62,48 @@
 						<div class="col-xs-4">
 								<label>DATE:</label>
 								<input type="text" class="other-field" value="<?= $db->selectNow('ticket','dateFormatted','ticketNo',$ticketNo) ?>">
-						</div>					
-						<table class="table table-bordered">
-							<thead>
-								<tr>
-									<th>SUBJECT</th>
-									<th>CODE/TITLE</th>
-									<th>START</th>
-									<th>END</th>
-									<th>ACTIVITY</th>
-									<th>REMARKS</th>
-								</tr>
-							</thead>
-							<tbody>
-								<?php foreach($ticket->getTicketByTicketNo_id() as $id): ?>
+						</div>		
+						<br>
+						<div class="row">			
+							<table class="table table-bordered">
+								<thead>
 									<tr>
-										<td>
-											<?= $db->selectNow('ticket','subject','id',$id) ?>
-										</td>
-										<td>
-											<?= $db->selectNow('ticket','title','id',$id) ?>
-										</td>
-										<td>
-											<?= $db->selectNow('ticket','start','id',$id) ?>
-										</td>
-										<td>
-											<?= $db->selectNow('ticket','end','id',$id) ?>
-										</td>
-										<td>
-											<?= $db->selectNow('ticket','activity','id',$id) ?>
-										</td>
-										<td>
-											<?= $db->selectNow('ticket','remarks','id',$id) ?>
-										</td>
+										<th>SUBJECT</th>
+										<th>CODE/TITLE</th>
+										<th>START</th>
+										<th>END</th>
+										<th>ACTIVITY</th>
+										<th>REMARKS</th>
 									</tr>
-								<?php endforeach; ?>
-							</tbody>
-						</table>
+								</head>
+								<body>
+									<?php foreach($ticket->getTicketByTicketNo_id() as $id): ?>
+										<tr>
+											<td>
+												<?= $db->selectNow('ticket','subject','id',$id) ?>
+											</td>
+											<td>
+												<?= $db->selectNow('ticket','title','id',$id) ?>
+											</td>
+											<td>
+												<?= $db->selectNow('ticket','start','id',$id) ?>
+											</td>
+											<td>
+												<?= $db->selectNow('ticket','end','id',$id) ?>
+											</td>
+											<td>
+												<?= $db->selectNow('ticket','activity','id',$id) ?>
+											</td>
+											<td>
+												<?= $db->selectNow('ticket','remarks','id',$id) ?>
+											</td>
+										</tr>
+									<?php endforeach; ?>
+								</body>
+							</table>
+						</div>
+						<br>
+						<br>
 						<div class="row">
 							<div class="footer">
 								<div class="col-xs-4">
